@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | EduHub</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="dashboard.html" class="logo">EduHub</a>
+
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <button class="btn danger" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard container">
+    <section class="dashboard-header">
+      <div>
+        <h1 id="welcomeTitle">Student Dashboard</h1>
+        <p>Welcome to your EduHub learning space.</p>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3>Overall Progress</h3>
+        <p>0%</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Modules Started</h3>
+        <p>0</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Completed Lessons</h3>
+        <p>0</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Favorite Items</h3>
+        <p>0</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Forum Questions</h3>
+        <p>0</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Books Purchased</h3>
+        <p>0</p>
+      </div>
+    </section>
+
+    <section class="profile-box">
+      <h2>Profile Information</h2>
+      <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+      <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+      <p><strong>Student ID:</strong> <span id="profileStudentId">Loading...</span></p>
+      <p><strong>Program:</strong> <span id="profileProgram">Loading...</span></p>
+      <p><strong>Year:</strong> <span id="profileYear">Loading...</span></p>
+      <p><strong>Role:</strong> <span id="profileRole">Loading...</span></p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

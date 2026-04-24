@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | EduHub</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">EduHub</a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <main class="auth-wrapper">
+    <section class="auth-card">
+      <h1>Create Account</h1>
+      <p>Register as a student to access EduHub.</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="studentId">Student ID</label>
+          <input type="text" id="studentId" />
+        </div>
+
+        <div class="form-group">
+          <label for="program">Program</label>
+          <input type="text" id="program" placeholder="Example: Web Technology" />
+        </div>
+
+        <div class="form-group">
+          <label for="yearOfStudy">Year of Study</label>
+          <input type="number" id="yearOfStudy" min="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <p id="message" class="message"></p>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account?
+        <a href="login.html">Login here</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    const message = document.getElementById('message');
+
+    registerForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      message.textContent = 'Creating your account...';
+      message.className = 'message';
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const studentId = document.getElementById('studentId').value.trim();
+      const program = document.getElementById('program').value.trim();
+      const yearOfStudy = document.getElementById('yearOfStudy').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const data = await apiRequest('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({
+            full_name: fullName,
+            email,
+            password,
+            student_id: studentId || null,
+            program: program || null,
+            year_of_study: yearOfStudy ? Number(yearOfStudy) : null
+          })
+        });
+
+        saveAuthData(data.token, data.user);
+
+        message.textContent = 'Account created successfully. Redirecting...';
+        message.className = 'message success';
+
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 800);
+      } catch (error) {
+        message.textContent = error.message;
+        message.className = 'message error';
+      }
+    });
+  </script>
+</body>
+</html>

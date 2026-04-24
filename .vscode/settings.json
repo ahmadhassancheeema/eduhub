@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+
+  "js/ts.preferences.quoteStyle": "single",
+
+  "prettier.singleQuote": true,
+  "prettier.semi": true
+}
