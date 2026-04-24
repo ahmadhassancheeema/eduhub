@@ -1,28 +1,74 @@
-requireAuth();
+/**
+ * dashboard.js
+ * ----------------------------------------------------
+ * Handles the protected student dashboard.
+ *
+ * Current features:
+ * - Protects dashboard from guests
+ * - Loads logged-in user profile
+ * - Loads real learning progress from backend
+ * - Updates dashboard stats
+ */
 
-async function loadDashboard() {
+document.addEventListener("DOMContentLoaded", async () => {
+  requireAuth();
+
+  await loadDashboardProfile();
+  await loadDashboardProgress();
+});
+
+/**
+ * Loads the logged-in student's profile from the backend.
+ */
+async function loadDashboardProfile() {
   try {
-    const data = await apiRequest('/auth/me');
+    const data = await apiRequest("/auth/me");
+
     const user = data.user;
 
-    localStorage.setItem('eduhub_user', JSON.stringify(user));
+    document.getElementById("welcomeTitle").textContent = `Welcome, ${user.full_name}`;
 
-    document.getElementById('welcomeTitle').textContent =
-      `Welcome, ${user.full_name}`;
+    document.getElementById("profileName").textContent = user.full_name;
+    document.getElementById("profileEmail").textContent = user.email;
+    document.getElementById("profileStudentId").textContent = user.student_id;
+    document.getElementById("profileProgram").textContent = user.program || "Not added";
+    document.getElementById("profileYear").textContent = user.year_of_study || "Not added";
+    document.getElementById("profileRole").textContent = user.role;
 
-    document.getElementById('profileName').textContent = user.full_name;
-    document.getElementById('profileEmail').textContent = user.email;
-    document.getElementById('profileStudentId').textContent =
-      user.student_id || 'Not provided';
-    document.getElementById('profileProgram').textContent =
-      user.program || 'Not provided';
-    document.getElementById('profileYear').textContent =
-      user.year_of_study || 'Not provided';
-    document.getElementById('profileRole').textContent = user.role;
+    localStorage.setItem("eduhub_user", JSON.stringify(user));
   } catch (error) {
-    alert('Session expired. Please login again.');
+    console.error("Profile loading error:", error);
     logout();
   }
 }
 
-loadDashboard();
+/**
+ * Loads real learning progress from the backend.
+ */
+async function loadDashboardProgress() {
+  try {
+    const data = await apiRequest("/progress");
+
+    const progress = data.progress;
+
+    document.getElementById("overallProgress").textContent =
+      `${progress.overall_progress_percentage || 0}%`;
+
+    document.getElementById("modulesStarted").textContent =
+      progress.modules_started || 0;
+
+    document.getElementById("completedLessons").textContent =
+      progress.completed_lessons || 0;
+
+    // These features are coming in later phases.
+    document.getElementById("favoriteItems").textContent = "0";
+    document.getElementById("forumQuestions").textContent = "0";
+    document.getElementById("booksPurchased").textContent = "0";
+  } catch (error) {
+    console.error("Progress loading error:", error);
+
+    document.getElementById("overallProgress").textContent = "0%";
+    document.getElementById("modulesStarted").textContent = "0";
+    document.getElementById("completedLessons").textContent = "0";
+  }
+}
