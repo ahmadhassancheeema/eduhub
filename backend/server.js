@@ -11,6 +11,7 @@
  * - Authentication routes
  * - Learning Wing routes
  * - Progress routes
+ * - Favorites routes
  * - 404 handler
  * - Global error handler
  */
@@ -27,6 +28,7 @@ const moduleRoutes = require("./routes/moduleRoutes");
 const lessonRoutes = require("./routes/lessonRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const progressRoutes = require("./routes/progressRoutes");
+const favoriteRoutes = require("./routes/favoriteRoutes");
 
 const notFoundMiddleware = require("./middleware/notFoundMiddleware");
 const errorMiddleware = require("./middleware/errorMiddleware");
@@ -101,6 +103,7 @@ app.use("/api/modules", moduleRoutes);
 app.use("/api/lessons", lessonRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/progress", progressRoutes);
+app.use("/api/favorites", favoriteRoutes);
 
 /**
  * 404 handler.

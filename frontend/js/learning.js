@@ -4,6 +4,8 @@
  * Handles the Learning Wing module list page.
  */
 
+let favoriteKeys = new Set();
+
 document.addEventListener("DOMContentLoaded", () => {
   protectLearningPage();
   setupLogoutButton();
@@ -36,6 +38,7 @@ async function setupLearningPage() {
   const refreshButton = document.getElementById("refreshModulesButton");
 
   await loadCategories();
+  await loadFavoriteKeys();
   await loadModules();
 
   if (searchInput) {
@@ -48,6 +51,18 @@ async function setupLearningPage() {
 
   if (refreshButton) {
     refreshButton.addEventListener("click", loadModules);
+  }
+}
+
+async function loadFavoriteKeys() {
+  try {
+    const data = await apiRequest("/favorites");
+
+    favoriteKeys = new Set(
+      data.favorites.map((favorite) => `${favorite.item_type}:${favorite.item_id}`)
+    );
+  } catch (error) {
+    favoriteKeys = new Set();
   }
 }
 
@@ -96,6 +111,8 @@ async function loadModules() {
     : "/modules";
 
   try {
+    await loadFavoriteKeys();
+
     const data = await apiRequest(endpoint);
 
     if (!data.modules || data.modules.length === 0) {
@@ -115,6 +132,20 @@ async function loadModules() {
         await enrollModule(moduleId);
       });
     });
+
+    document.querySelectorAll("[data-favorite-module]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const moduleId = button.getAttribute("data-favorite-module");
+        await addFavorite("module", moduleId);
+      });
+    });
+
+    document.querySelectorAll("[data-unfavorite-module]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const moduleId = button.getAttribute("data-unfavorite-module");
+        await removeFavoriteByItem("module", moduleId);
+      });
+    });
   } catch (error) {
     modulesContainer.innerHTML = `
       <div class="empty-state">
@@ -130,6 +161,7 @@ function createModuleCard(module) {
   const progress = Number(module.progress_percentage || 0);
   const enrolledText = module.is_enrolled ? "Started" : "Not started";
   const enrolledClass = module.is_enrolled ? "badge-success" : "badge-muted";
+  const isFavorite = favoriteKeys.has(`module:${module.id}`);
 
   return `
     <article class="module-card">
@@ -137,6 +169,11 @@ function createModuleCard(module) {
         <span class="badge">${escapeHtml(module.category_name || "General")}</span>
         <span class="badge ${enrolledClass}">${enrolledText}</span>
         <span class="badge badge-muted">${escapeHtml(module.difficulty_level)}</span>
+        ${
+          isFavorite
+            ? `<span class="badge badge-success">Saved</span>`
+            : ""
+        }
       </div>
 
       <h2>${escapeHtml(module.title)}</h2>
@@ -165,7 +202,19 @@ function createModuleCard(module) {
           ${
             module.is_enrolled
               ? ""
-              : `<button class="btn btn-secondary" data-enroll-module="${module.id}">Start Module</button>`
+              : `<button class="btn btn-secondary" data-enroll-module="${module.id}">
+                  Start Module
+                </button>`
+          }
+
+          ${
+            isFavorite
+              ? `<button class="btn btn-secondary" data-unfavorite-module="${module.id}">
+                  Remove Favorite
+                </button>`
+              : `<button class="btn btn-secondary" data-favorite-module="${module.id}">
+                  Save
+                </button>`
           }
 
           <a class="btn btn-primary" href="module-details.html?id=${module.id}">
@@ -184,6 +233,40 @@ async function enrollModule(moduleId) {
     });
 
     showLearningMessage("Module started successfully.", "success");
+    await loadModules();
+  } catch (error) {
+    showLearningMessage(error.message, "error");
+  }
+}
+
+async function addFavorite(itemType, itemId) {
+  try {
+    await apiRequest("/favorites", {
+      method: "POST",
+      body: JSON.stringify({
+        item_type: itemType,
+        item_id: itemId
+      })
+    });
+
+    showLearningMessage("Item saved to favorites.", "success");
+    await loadModules();
+  } catch (error) {
+    showLearningMessage(error.message, "error");
+  }
+}
+
+async function removeFavoriteByItem(itemType, itemId) {
+  try {
+    await apiRequest("/favorites", {
+      method: "DELETE",
+      body: JSON.stringify({
+        item_type: itemType,
+        item_id: itemId
+      })
+    });
+
+    showLearningMessage("Favorite removed.", "success");
     await loadModules();
   } catch (error) {
     showLearningMessage(error.message, "error");
