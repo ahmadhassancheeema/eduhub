@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Dashboard | EduHub</title>
+
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
 </head>
@@ -13,6 +15,9 @@
 
     <div class="nav-links">
       <a href="dashboard.html">Dashboard</a>
+      <a href="learning.html">Learning</a>
+      <a href="#">Forum</a>
+      <a href="#">Bookstore</a>
       <button class="btn danger" onclick="logout()">Logout</button>
     </div>
   </nav>
@@ -28,43 +33,79 @@
     <section class="stats-grid">
       <div class="stat-card">
         <h3>Overall Progress</h3>
-        <p>0%</p>
+        <p id="overallProgress">0%</p>
       </div>
 
       <div class="stat-card">
         <h3>Modules Started</h3>
-        <p>0</p>
+        <p id="modulesStarted">0</p>
       </div>
 
       <div class="stat-card">
         <h3>Completed Lessons</h3>
-        <p>0</p>
+        <p id="completedLessons">0</p>
       </div>
 
       <div class="stat-card">
         <h3>Favorite Items</h3>
-        <p>0</p>
+        <p id="favoriteItems">0</p>
       </div>
 
       <div class="stat-card">
         <h3>Forum Questions</h3>
-        <p>0</p>
+        <p id="forumQuestions">0</p>
       </div>
 
       <div class="stat-card">
         <h3>Books Purchased</h3>
-        <p>0</p>
+        <p id="booksPurchased">0</p>
       </div>
     </section>
 
     <section class="profile-box">
       <h2>Profile Information</h2>
-      <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
-      <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
-      <p><strong>Student ID:</strong> <span id="profileStudentId">Loading...</span></p>
-      <p><strong>Program:</strong> <span id="profileProgram">Loading...</span></p>
-      <p><strong>Year:</strong> <span id="profileYear">Loading...</span></p>
-      <p><strong>Role:</strong> <span id="profileRole">Loading...</span></p>
+
+      <p>
+        <strong>Name:</strong>
+        <span id="profileName">Loading...</span>
+      </p>
+
+      <p>
+        <strong>Email:</strong>
+        <span id="profileEmail">Loading...</span>
+      </p>
+
+      <p>
+        <strong>Student ID:</strong>
+        <span id="profileStudentId">Loading...</span>
+      </p>
+
+      <p>
+        <strong>Program:</strong>
+        <span id="profileProgram">Loading...</span>
+      </p>
+
+      <p>
+        <strong>Year:</strong>
+        <span id="profileYear">Loading...</span>
+      </p>
+
+      <p>
+        <strong>Role:</strong>
+        <span id="profileRole">Loading...</span>
+      </p>
+    </section>
+
+    <section class="profile-box">
+      <h2>Continue Learning</h2>
+      <p>
+        Open the Learning Wing to browse modules, start a module, view lessons,
+        and track your progress.
+      </p>
+
+      <a href="learning.html" class="btn">
+        Go to Learning Wing
+      </a>
     </section>
   </main>
 

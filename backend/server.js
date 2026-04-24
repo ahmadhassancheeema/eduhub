@@ -1,57 +1,121 @@
-require('dotenv').config();
+/**
+ * server.js
+ * ----------------------------------------------------
+ * Main Express server for EduHub.
+ *
+ * Current completed parts:
+ * - Express app setup
+ * - CORS
+ * - JSON body parsing
+ * - Database test route
+ * - Authentication routes
+ * - Learning Wing routes
+ * - Progress routes
+ * - 404 handler
+ * - Global error handler
+ */
 
-const express = require('express');
-const cors = require('cors');
-const db = require('./db');
-const authRoutes = require('./routes/authRoutes');
+require("dotenv").config();
+
+const express = require("express");
+const cors = require("cors");
+
+const db = require("./db");
+
+const authRoutes = require("./routes/authRoutes");
+const moduleRoutes = require("./routes/moduleRoutes");
+const lessonRoutes = require("./routes/lessonRoutes");
+const resourceRoutes = require("./routes/resourceRoutes");
+const progressRoutes = require("./routes/progressRoutes");
+
+const notFoundMiddleware = require("./middleware/notFoundMiddleware");
+const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+/**
+ * CORS setup
+ * This allows your frontend Live Server to communicate with the backend.
+ */
+app.use(
+  cors({
+    origin: [
+      "http://127.0.0.1:5500",
+      "http://localhost:5500",
+      "http://localhost:3000"
+    ],
+    credentials: true
+  })
+);
+
+/**
+ * Allows Express to read JSON request bodies.
+ */
 app.use(express.json());
 
-app.get('/', (req, res) => {
+/**
+ * Root test route.
+ */
+app.get("/", (req, res) => {
   res.json({
-    message: 'EduHub backend is running',
-    status: 'success'
+    message: "EduHub backend is running",
+    status: "success"
   });
 });
 
-app.get('/api/health', (req, res) => {
+/**
+ * Health check route.
+ */
+app.get("/api/health", (req, res) => {
   res.json({
-    message: 'Server is healthy',
+    message: "Server is healthy",
+    status: "success",
     uptime: process.uptime()
   });
 });
 
-app.get('/api/db-test', async (req, res) => {
+/**
+ * Database test route.
+ * This confirms Express can connect to Supabase PostgreSQL.
+ */
+app.get("/api/db-test", async (req, res, next) => {
   try {
-    const result = await db.query('SELECT NOW() AS current_time');
+    const result = await db.query("SELECT NOW() AS current_time");
 
     res.json({
-      message: 'Database connection successful',
+      message: "Database connection successful",
       current_time: result.rows[0].current_time
     });
   } catch (error) {
-    console.error('Database connection error:', error.message);
-
-    res.status(500).json({
-      message: 'Database connection failed',
-      error: error.message
-    });
+    next(error);
   }
 });
 
-app.use('/api/auth', authRoutes);
+/**
+ * API routes.
+ */
+app.use("/api/auth", authRoutes);
+app.use("/api/modules", moduleRoutes);
+app.use("/api/lessons", lessonRoutes);
+app.use("/api/resources", resourceRoutes);
+app.use("/api/progress", progressRoutes);
 
-app.use((req, res) => {
-  res.status(404).json({
-    message: 'Route not found'
-  });
-});
+/**
+ * 404 handler.
+ * Runs when no route matches the request.
+ */
+app.use(notFoundMiddleware);
 
+/**
+ * Global error handler.
+ */
+app.use(errorMiddleware);
+
+/**
+ * Start server.
+ */
 app.listen(PORT, () => {
   console.log(`EduHub backend server is running on port ${PORT}`);
 });

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Module Details | EduHub</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="learning.html">Learning</a>
+        <a href="#">Forum</a>
+        <a href="#">Bookstore</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="learning.html" class="back-link">← Back to Learning Wing</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Module Details</p>
+          <h1 id="moduleTitle">Loading module...</h1>
+          <p id="moduleDescription">Please wait while the module details load.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="detailMessage" class="message-box"></div>
+
+      <div class="module-detail-layout">
+        <div class="panel">
+          <h2>Lessons</h2>
+
+          <div id="lessonList" class="lesson-list">
+            <div class="empty-state">Loading lessons...</div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="panel">
+            <h2>Module Summary</h2>
+
+            <div class="module-meta">
+              <span class="badge" id="moduleCode">Code</span>
+              <span class="badge badge-muted" id="moduleCategory">Category</span>
+              <span class="badge badge-muted" id="moduleDifficulty">Difficulty</span>
+            </div>
+
+            <p style="margin-top: 16px;">
+              <strong>Instructor:</strong>
+              <span id="moduleInstructor">Loading...</span>
+            </p>
+
+            <button id="enrollButton" class="btn btn-primary btn-full">
+              Start Module
+            </button>
+
+            <div class="detail-stat-grid">
+              <div class="detail-stat">
+                <span>Total Lessons</span>
+                <strong id="moduleLessons">0</strong>
+              </div>
+
+              <div class="detail-stat">
+                <span>Completed</span>
+                <strong id="moduleCompleted">0</strong>
+              </div>
+            </div>
+
+            <div style="margin-top: 18px;">
+              <div class="small-progress-text">
+                <span>Progress</span>
+                <span id="moduleProgress">0%</span>
+              </div>
+
+              <div class="progress-bar">
+                <div id="moduleProgressFill" class="progress-fill" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top: 22px;">
+            <h2>Resources</h2>
+
+            <div id="resourceList" class="resource-list">
+              <div class="empty-state">Loading resources...</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/module-details.js"></script>
+</body>
+</html>
