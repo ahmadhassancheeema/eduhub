@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Book Details | EduHub</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/bookstore.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="learning.html">Learning</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="#">Forum</a>
+        <a href="bookstore.html">Bookstore</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="bookstore.html" class="back-link">← Back to Bookstore</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Book Details</p>
+          <h1 id="bookTitle">Loading book...</h1>
+          <p id="bookDescription">Please wait while the book details load.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="bookDetailsMessage" class="message-box"></div>
+
+      <div class="module-detail-layout">
+        <div class="panel">
+          <div class="book-cover" id="bookCover">B</div>
+
+          <h2 id="bookMainTitle">Loading...</h2>
+
+          <p>
+            <strong>Author:</strong>
+            <span id="bookAuthor">Loading...</span>
+          </p>
+
+          <p>
+            <strong>ISBN:</strong>
+            <span id="bookIsbn">Loading...</span>
+          </p>
+
+          <p>
+            <strong>Publisher:</strong>
+            <span id="bookPublisher">Loading...</span>
+          </p>
+
+          <p>
+            <strong>Edition:</strong>
+            <span id="bookEdition">Loading...</span>
+          </p>
+
+          <p>
+            <strong>Recommended Module:</strong>
+            <span id="bookModule">None</span>
+          </p>
+        </div>
+
+        <aside>
+          <div class="panel">
+            <h2>Purchase Information</h2>
+
+            <div class="module-meta">
+              <span class="badge" id="bookCategory">Category</span>
+              <span class="badge badge-muted" id="bookStock">Stock</span>
+            </div>
+
+            <div class="book-price" style="margin-top: 18px;">
+              RM <span id="bookPrice">0.00</span>
+            </div>
+
+            <div class="form-group" style="margin-top: 18px;">
+              <label for="quantityInput">Quantity</label>
+              <input type="number" id="quantityInput" min="1" value="1" />
+            </div>
+
+            <button id="addToCartButton" class="btn btn-primary btn-full">
+              Add to Cart
+            </button>
+
+            <a href="cart.html" class="btn btn-secondary btn-full" style="margin-top: 12px;">
+              View Cart
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/book-details.js"></script>
+</body>
+</html>

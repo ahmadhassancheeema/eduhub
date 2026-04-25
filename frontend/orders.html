@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Learning Wing | EduHub</title>
+  <title>Orders | EduHub</title>
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/bookstore.css" />
 </head>
 <body>
   <header class="navbar">
@@ -34,42 +35,26 @@
     <section class="page-header">
       <div class="container">
         <div class="page-header-card">
-          <p class="eyebrow">Learning Wing</p>
-          <h1>Explore academic modules</h1>
+          <p class="eyebrow">Purchase History</p>
+          <h1>Your orders</h1>
           <p>
-            Browse structured modules, open lessons, access resources, and track your learning progress.
+            View your simulated bookstore purchases and order totals.
           </p>
         </div>
       </div>
     </section>
 
     <section class="container">
-      <div id="learningMessage" class="message-box"></div>
+      <div id="ordersMessage" class="message-box"></div>
 
-      <div class="toolbar">
-        <input
-          type="search"
-          id="moduleSearch"
-          placeholder="Search modules by title, code, or description..."
-        />
-
-        <select id="categoryFilter">
-          <option value="">All categories</option>
-        </select>
-
-        <button id="refreshModulesButton" class="btn btn-secondary">
-          Refresh
-        </button>
-      </div>
-
-      <div id="modulesContainer" class="learning-grid">
-        <div class="empty-state">Loading modules...</div>
+      <div id="ordersContainer" class="order-list">
+        <div class="empty-state">Loading orders...</div>
       </div>
     </section>
   </main>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/learning.js"></script>
+  <script src="js/orders.js"></script>
 </body>
 </html>

@@ -1,0 +1,131 @@
+-- EduHub Phase 4 Bookstore Seed Data
+-- Adds sample academic books for the bookstore.
+
+INSERT INTO books (
+    title,
+    author,
+    isbn,
+    description,
+    category,
+    price,
+    stock_quantity,
+    cover_image_url,
+    publisher,
+    edition,
+    recommended_module_id,
+    is_active
+)
+VALUES
+(
+    'Web Development Basics',
+    'Amina Rahman',
+    '978-1000000001',
+    'A beginner-friendly guide to HTML, CSS, JavaScript, and modern web development concepts.',
+    'Web Development',
+    45.00,
+    20,
+    NULL,
+    'EduPress',
+    '1st Edition',
+    (SELECT id FROM modules WHERE module_code = 'WEB101'),
+    TRUE
+),
+(
+    'Practical JavaScript for Students',
+    'Daniel Lim',
+    '978-1000000002',
+    'A practical programming book focused on JavaScript fundamentals, DOM manipulation, and API requests.',
+    'Programming',
+    55.00,
+    15,
+    NULL,
+    'CodePath Publishing',
+    '2nd Edition',
+    (SELECT id FROM modules WHERE module_code = 'WEB101'),
+    TRUE
+),
+(
+    'PostgreSQL and Database Design',
+    'Dr. Ahmed Khan',
+    '978-1000000003',
+    'Covers relational database design, SQL queries, normalization, PostgreSQL, and database relationships.',
+    'Database Systems',
+    70.00,
+    12,
+    NULL,
+    'Database Academy',
+    '1st Edition',
+    (SELECT id FROM modules WHERE module_code = 'DBS201'),
+    TRUE
+),
+(
+    'SQL Practice Workbook',
+    'Sara Yusuf',
+    '978-1000000004',
+    'A workbook with SQL exercises, query examples, joins, filtering, grouping, and database problem solving.',
+    'Database Systems',
+    38.00,
+    25,
+    NULL,
+    'DataLearn',
+    '3rd Edition',
+    (SELECT id FROM modules WHERE module_code = 'DBS201'),
+    TRUE
+),
+(
+    'Software Engineering Made Simple',
+    'Maryam Ali',
+    '978-1000000005',
+    'Introduces requirements, UML diagrams, software design, testing, maintenance, and project management.',
+    'Software Engineering',
+    62.00,
+    18,
+    NULL,
+    'SE Press',
+    '1st Edition',
+    (SELECT id FROM modules WHERE module_code = 'SWE301'),
+    TRUE
+),
+(
+    'UML Class Diagrams for Beginners',
+    'Hassan Farooq',
+    '978-1000000006',
+    'A simple visual guide to UML classes, attributes, methods, associations, aggregation, composition, and inheritance.',
+    'Software Engineering',
+    42.00,
+    14,
+    NULL,
+    'Modeling House',
+    '1st Edition',
+    (SELECT id FROM modules WHERE module_code = 'SWE301'),
+    TRUE
+),
+(
+    'Academic Study Skills Handbook',
+    'Nadia Karim',
+    '978-1000000007',
+    'A student-focused handbook for note-taking, revision planning, academic writing, and exam preparation.',
+    'Study Skills',
+    30.00,
+    30,
+    NULL,
+    'Campus Press',
+    '4th Edition',
+    NULL,
+    TRUE
+),
+(
+    'Introduction to Computer Science',
+    'Omar Siddiq',
+    '978-1000000008',
+    'A broad introduction to computing, programming, data, algorithms, web systems, and software applications.',
+    'Computer Science',
+    58.00,
+    10,
+    NULL,
+    'TechWorld Academic',
+    '2nd Edition',
+    NULL,
+    TRUE
+)
+ON CONFLICT (isbn) DO NOTHING;

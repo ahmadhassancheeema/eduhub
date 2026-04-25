@@ -29,6 +29,9 @@ const lessonRoutes = require("./routes/lessonRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const progressRoutes = require("./routes/progressRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
+const bookRoutes = require("./routes/bookRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 const notFoundMiddleware = require("./middleware/notFoundMiddleware");
 const errorMiddleware = require("./middleware/errorMiddleware");
@@ -104,6 +107,9 @@ app.use("/api/lessons", lessonRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/favorites", favoriteRoutes);
+app.use("/api/books", bookRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api", orderRoutes);
 
 /**
  * 404 handler.
