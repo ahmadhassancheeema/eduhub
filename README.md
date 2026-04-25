@@ -1,6 +1,6 @@
 # EduHub
 
-EduHub is a full-stack academic platform for students. It combines student authentication, learning modules, progress tracking, favorites, academic discussion, and an academic bookstore into one organized web application.
+EduHub is a full-stack academic platform for students. It combines student authentication, learning modules, progress tracking, favorites, academic discussion, an academic bookstore, and an admin management system into one organized web application.
 
 This project is being developed as a realistic student full-stack web technology project using HTML, CSS, JavaScript, Node.js, Express.js, and Supabase PostgreSQL.
 
@@ -16,12 +16,13 @@ Phase 2: Learning Wing and Progress Tracking completed
 Phase 3: Favorites completed
 Phase 4: Bookstore, Cart, Checkout, and Orders completed
 Phase 5: Discussion Forum completed
+Phase 6: Admin Panel completed
 ```
 
 Next phase:
 
 ```text
-Phase 6: Admin Panel
+Phase 7: Final Polish, Testing, and Deployment
 ```
 
 ---
@@ -87,6 +88,28 @@ Downvote answers
 Report questions
 Report answers
 Real dashboard forum question count
+
+Admin dashboard
+Admin analytics cards
+Manage users
+Change user roles
+Activate and deactivate users
+Manage orders
+Update order status
+Review forum reports
+Mark reports as reviewed or rejected
+Hide, lock, and reopen reported questions
+Hide and show reported answers
+Manage bookstore books
+Add books
+Edit books
+Activate and deactivate books
+Update book price and stock
+Manage learning categories
+Manage modules
+Publish and unpublish modules
+Manage lessons
+Manage learning resources
 ```
 
 ---
@@ -96,18 +119,13 @@ Real dashboard forum question count
 Still planned:
 
 ```text
-Admin panel
-User management
-Module management
-Lesson management
-Resource management
-Book management
-Order management
-Forum report moderation
-Analytics dashboard
+Final UI polish
+Responsive design improvements
+Better loading states
+Better error messages
+Manual testing
 Deployment
-Testing
-Final polish
+Final README documentation
 ```
 
 ---
@@ -151,121 +169,6 @@ Git
 GitHub
 Live Server
 Nodemon
-```
-
----
-
-## Current Folder Structure
-
-```text
-eduhub/
-│
-├── backend/
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── bookController.js
-│   │   ├── cartController.js
-│   │   ├── favoriteController.js
-│   │   ├── forumController.js
-│   │   ├── lessonController.js
-│   │   ├── moduleController.js
-│   │   ├── orderController.js
-│   │   ├── progressController.js
-│   │   └── resourceController.js
-│   │
-│   ├── middleware/
-│   │   ├── authMiddleware.js
-│   │   ├── errorMiddleware.js
-│   │   └── notFoundMiddleware.js
-│   │
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── bookRoutes.js
-│   │   ├── cartRoutes.js
-│   │   ├── favoriteRoutes.js
-│   │   ├── forumRoutes.js
-│   │   ├── lessonRoutes.js
-│   │   ├── moduleRoutes.js
-│   │   ├── orderRoutes.js
-│   │   ├── progressRoutes.js
-│   │   └── resourceRoutes.js
-│   │
-│   ├── sql/
-│   │   ├── 01_schema.sql
-│   │   ├── 02_seed.sql
-│   │   ├── 03_indexes.sql
-│   │   ├── 04_learning_schema.sql
-│   │   ├── 05_learning_seed.sql
-│   │   ├── 06_favorites_schema.sql
-│   │   ├── 07_bookstore_schema.sql
-│   │   ├── 08_bookstore_seed.sql
-│   │   ├── 09_forum_schema.sql
-│   │   └── 10_forum_seed.sql
-│   │
-│   ├── uploads/
-│   │   └── .gitkeep
-│   │
-│   ├── utils/
-│   │   ├── passwordUtils.js
-│   │   ├── tokenUtils.js
-│   │   └── validationUtils.js
-│   │
-│   ├── db.js
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── server.js
-│   ├── .env.example
-│   └── .gitignore
-│
-├── frontend/
-│   ├── assets/
-│   │   ├── icons/
-│   │   ├── images/
-│   │   └── placeholders/
-│   │
-│   ├── css/
-│   │   ├── auth.css
-│   │   ├── bookstore.css
-│   │   ├── dashboard.css
-│   │   ├── forum.css
-│   │   ├── learning.css
-│   │   └── style.css
-│   │
-│   ├── js/
-│   │   ├── api.js
-│   │   ├── ask-question.js
-│   │   ├── auth.js
-│   │   ├── book-details.js
-│   │   ├── bookstore.js
-│   │   ├── cart.js
-│   │   ├── config.js
-│   │   ├── dashboard.js
-│   │   ├── favorites.js
-│   │   ├── forum.js
-│   │   ├── learning.js
-│   │   ├── main.js
-│   │   ├── module-details.js
-│   │   ├── orders.js
-│   │   └── question.js
-│   │
-│   ├── ask-question.html
-│   ├── book-details.html
-│   ├── bookstore.html
-│   ├── cart.html
-│   ├── dashboard.html
-│   ├── favorites.html
-│   ├── forum.html
-│   ├── index.html
-│   ├── learning.html
-│   ├── login.html
-│   ├── module-details.html
-│   ├── orders.html
-│   ├── question.html
-│   └── register.html
-│
-├── .vscode/
-├── .gitignore
-└── README.md
 ```
 
 ---
@@ -318,19 +221,6 @@ POST   /api/modules/:id/enroll
 DELETE /api/modules/:id/unenroll
 GET    /api/modules/:moduleId/lessons
 GET    /api/modules/:moduleId/resources
-```
-
-### Lessons
-
-```text
-GET /api/lessons/:id
-GET /api/lessons/:lessonId/resources
-```
-
-### Resources
-
-```text
-GET /api/resources/:id
 ```
 
 ### Progress
@@ -394,6 +284,57 @@ POST /api/forum/vote
 POST /api/forum/report
 ```
 
+### Admin
+
+```text
+GET /api/admin/dashboard
+
+GET /api/admin/users
+PUT /api/admin/users/:id/role
+PUT /api/admin/users/:id/status
+
+GET /api/admin/orders
+PUT /api/admin/orders/:id/status
+
+GET /api/admin/reports
+PUT /api/admin/reports/:id
+
+PUT /api/admin/forum/questions/:id/status
+PUT /api/admin/forum/answers/:id/status
+```
+
+### Admin Books
+
+```text
+GET  /api/admin/books
+POST /api/admin/books
+PUT  /api/admin/books/:id
+PUT  /api/admin/books/:id/status
+```
+
+### Admin Learning
+
+```text
+GET  /api/admin/learning/categories
+POST /api/admin/learning/categories
+
+GET  /api/admin/learning/modules
+POST /api/admin/learning/modules
+PUT  /api/admin/learning/modules/:id
+PUT  /api/admin/learning/modules/:id/status
+
+GET /api/admin/learning/modules/:moduleId/lessons
+GET /api/admin/learning/modules/:moduleId/resources
+
+POST   /api/admin/learning/lessons
+PUT    /api/admin/learning/lessons/:id
+DELETE /api/admin/learning/lessons/:id
+
+POST   /api/admin/learning/resources
+PUT    /api/admin/learning/resources/:id
+DELETE /api/admin/learning/resources/:id
+```
+
 ---
 
 ## Current Frontend Pages
@@ -403,16 +344,26 @@ index.html
 register.html
 login.html
 dashboard.html
+
 learning.html
 module-details.html
 favorites.html
+
 bookstore.html
 book-details.html
 cart.html
 orders.html
+
 forum.html
 ask-question.html
 question.html
+
+admin.html
+admin-users.html
+admin-orders.html
+admin-reports.html
+admin-books.html
+admin-learning.html
 ```
 
 ---
@@ -529,11 +480,12 @@ The project currently includes:
 Password hashing using bcrypt
 JWT authentication
 Protected backend routes
+Admin-only backend routes
+Role-based access control
 Environment variables
 CORS setup
 Basic input validation
 User account active/inactive check
-Role field prepared for admin/moderator system
 No real payment details stored
 Simulated checkout only
 Forum report system prepared for moderation
@@ -544,6 +496,8 @@ Important security reminder:
 ```text
 The real database connection string is stored in backend/.env.
 This file must never be pushed to GitHub.
+
+If any password was shared during testing, change it before deployment or final submission.
 ```
 
 ---
@@ -700,26 +654,36 @@ Dashboard forum question count
 Status:
 
 ```text
-Not started
+Completed
 ```
 
-Will include:
+Includes:
 
 ```text
 Admin dashboard
+Admin analytics
+Admin-only route protection
 Manage users
+Change user roles
+Activate/deactivate users
+Manage orders
+Update order status
+Manage forum reports
+Moderate reported questions
+Moderate reported answers
+Manage books
+Add/edit books
+Activate/deactivate books
+Manage learning categories
 Manage modules
+Publish/unpublish modules
 Manage lessons
 Manage resources
-Manage books
-Manage orders
-Manage forum reports
-Analytics dashboard
 ```
 
 ---
 
-### Phase 7: Polish and Deployment
+### Phase 7: Final Polish, Testing, and Deployment
 
 Status:
 
@@ -730,12 +694,15 @@ Not started
 Will include:
 
 ```text
-Responsive design improvements
-Better UI states
-Better error handling
-Testing
-Deployment
-Final documentation
+Responsive design review
+UI consistency improvements
+Error message improvements
+Manual testing checklist
+Deployment preparation
+Frontend deployment
+Backend deployment
+Supabase production checks
+Final README update
 ```
 
 ---
@@ -755,7 +722,7 @@ https://github.com/ahmadhassancheeema/eduhub
 The next development task is:
 
 ```text
-Phase 6: Admin Panel
+Phase 7: Final Polish, Testing, and Deployment
 ```
 
-Phase 6 will add admin-only management for users, learning content, books, orders, forum reports, and analytics.
+Phase 7 will prepare EduHub for final presentation, testing, and deployment.
