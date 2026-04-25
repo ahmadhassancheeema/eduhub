@@ -3,46 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>EduHub | Academic Learning Platform</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html" class="logo">EduHub</a>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="register.html" class="btn">Register</a>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="login.html">Login</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
   <main>
-    <section class="hero container">
-      <h1>Your Academic Learning Platform</h1>
-      <p>
-        EduHub helps students access learning modules, track progress,
-        join discussions, and explore academic resources in one place.
-      </p>
+    <section id="home" class="hero">
+      <div class="container">
+        <p class="eyebrow">Academic Learning Platform</p>
 
-      <a href="register.html" class="btn">Get Started</a>
-      <a href="login.html" class="btn secondary">Login</a>
+        <h1>Your Academic Learning Platform</h1>
+
+        <p>
+          EduHub helps students access learning modules, track progress,
+          join academic discussions, and explore study resources in one place.
+        </p>
+
+        <div class="module-actions" style="margin-top: 26px;">
+          <a href="register.html" class="btn btn-primary">Get Started</a>
+          <a href="login.html" class="btn btn-secondary">Login</a>
+        </div>
+      </div>
     </section>
 
-    <section class="container card-grid">
-      <div class="card">
-        <h3>Learning Wing</h3>
-        <p>Browse modules, lessons, videos, notes, and academic resources.</p>
-      </div>
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">Everything students need in one place</h2>
+        <p class="section-subtitle">
+          EduHub combines learning, discussion, progress tracking, and academic resources.
+        </p>
 
-      <div class="card">
-        <h3>Student Portal</h3>
-        <p>Track your progress, completed lessons, favorites, and activity.</p>
-      </div>
+        <div class="admin-actions-grid">
+          <article class="feature-card">
+            <h3>Learning Wing</h3>
+            <p>Browse modules, lessons, notes, videos, and academic resources.</p>
+          </article>
 
-      <div class="card">
-        <h3>Discussion Forum</h3>
-        <p>Ask questions, answer classmates, and save useful discussions.</p>
+          <article class="feature-card">
+            <h3>Student Portal</h3>
+            <p>Track your progress, completed lessons, favorites, and activity.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Discussion Forum</h3>
+            <p>Ask questions, answer classmates, vote, and report inappropriate content.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Bookstore</h3>
+            <p>Browse academic books, add to cart, checkout, and view orders.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Favorites</h3>
+            <p>Save modules and resources so you can return to them quickly.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Admin Panel</h3>
+            <p>Admins can manage users, learning content, books, orders, and reports.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" style="background: var(--background-soft);">
+      <div class="container">
+        <div class="page-header-card">
+          <p class="eyebrow">Why EduHub?</p>
+          <h1>Built for organized academic learning</h1>
+          <p>
+            Students often use separate platforms for notes, discussions, progress,
+            and books. EduHub brings these features together in one full-stack system.
+          </p>
+
+          <div class="module-actions" style="margin-top: 26px;">
+            <a href="register.html" class="btn btn-primary">Create Account</a>
+            <a href="login.html" class="btn btn-secondary">Already have an account?</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
