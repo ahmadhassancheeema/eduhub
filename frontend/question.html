@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Question | EduHub</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/forum.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="learning.html">Learning</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="forum.html">Forum</a>
+        <a href="bookstore.html">Bookstore</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="forum.html" class="back-link">← Back to Forum</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Question Details</p>
+          <h1 id="questionTitle">Loading question...</h1>
+          <p id="questionPreview">Please wait while the question loads.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="questionMessage" class="message-box"></div>
+
+      <div class="forum-layout">
+        <section>
+          <article class="question-card">
+            <div id="questionTags" class="tag-list"></div>
+
+            <div class="question-meta">
+              <span class="badge" id="questionCategory">Category</span>
+              <span class="badge badge-muted" id="questionAuthor">Author</span>
+              <span class="badge badge-muted" id="questionDate">Date</span>
+              <span class="badge badge-muted">
+                Views: <span id="questionViews">0</span>
+              </span>
+              <span class="badge badge-success">
+                Score: <span id="questionScore">0</span>
+              </span>
+            </div>
+
+            <div id="questionBody" class="question-body">
+              Loading...
+            </div>
+
+            <div class="question-actions">
+              <button id="upvoteQuestionButton" class="btn btn-secondary">
+                Upvote
+              </button>
+
+              <button id="downvoteQuestionButton" class="btn btn-secondary">
+                Downvote
+              </button>
+
+              <button id="reportQuestionButton" class="btn btn-secondary">
+                Report
+              </button>
+            </div>
+          </article>
+
+          <div class="panel" style="margin-top: 22px;">
+            <h2>Answers</h2>
+
+            <div id="answersContainer" class="answer-list">
+              <div class="empty-state">Loading answers...</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="forum-sidebar">
+          <div class="forum-panel">
+            <h2>Post an Answer</h2>
+
+            <form id="answerForm">
+              <div class="form-group">
+                <label for="answerBody">Your Answer</label>
+                <textarea
+                  id="answerBody"
+                  placeholder="Write a helpful academic answer..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                Submit Answer
+              </button>
+            </form>
+          </div>
+
+          <div class="forum-panel">
+            <h2>Tip</h2>
+            <p>
+              Good answers explain the reason, not only the final answer.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/question.js"></script>
+</body>
+</html>

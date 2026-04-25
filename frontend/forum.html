@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Forum | EduHub</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/forum.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="learning.html">Learning</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="forum.html">Forum</a>
+        <a href="bookstore.html">Bookstore</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header-card">
+          <p class="eyebrow">Discussion Forum</p>
+          <h1>Ask, answer, and learn together</h1>
+          <p>
+            Post academic questions, answer classmates, vote on helpful content,
+            and report inappropriate posts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="forumMessage" class="message-box"></div>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="forumSearch"
+          placeholder="Search questions by title or body..."
+        />
+
+        <select id="categoryFilter">
+          <option value="">All categories</option>
+        </select>
+
+        <button id="refreshQuestionsButton" class="btn btn-secondary">
+          Refresh
+        </button>
+      </div>
+
+      <div class="forum-layout">
+        <section>
+          <div id="questionsContainer" class="forum-list">
+            <div class="empty-state">Loading questions...</div>
+          </div>
+        </section>
+
+        <aside class="forum-sidebar">
+          <div class="forum-panel">
+            <h2>Ask a Question</h2>
+            <p>
+              Need help with a module, assignment, database design, code, or exam topic?
+            </p>
+            <a href="ask-question.html" class="btn btn-primary btn-full">
+              Ask Question
+            </a>
+          </div>
+
+          <div class="forum-panel">
+            <h2>Filter by Tag</h2>
+            <select id="tagFilter">
+              <option value="">All tags</option>
+            </select>
+          </div>
+
+          <div class="forum-panel">
+            <h2>Forum Rules</h2>
+            <p>Be respectful, stay academic, avoid spam, and explain your problem clearly.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/forum.js"></script>
+</body>
+</html>

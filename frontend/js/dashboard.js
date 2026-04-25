@@ -8,6 +8,7 @@
  * - Loads logged-in user profile
  * - Loads real learning progress from backend
  * - Loads real bookstore order count
+ * - Loads real forum question count
  * - Updates dashboard stats
  */
 
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadDashboardProfile();
   await loadDashboardProgress();
   await loadDashboardOrders();
+  await loadDashboardForumCount();
 });
 
 /**
@@ -62,9 +64,8 @@ async function loadDashboardProgress() {
     document.getElementById("completedLessons").textContent =
       progress.completed_lessons || 0;
 
-    // These features are coming in later phases.
+    // Favorites dashboard count can be connected later if needed.
     document.getElementById("favoriteItems").textContent = "0";
-    document.getElementById("forumQuestions").textContent = "0";
   } catch (error) {
     console.error("Progress loading error:", error);
 
@@ -91,5 +92,20 @@ async function loadDashboardOrders() {
   } catch (error) {
     console.error("Orders loading error:", error);
     document.getElementById("booksPurchased").textContent = "0";
+  }
+}
+
+/**
+ * Loads forum question count from the backend.
+ */
+async function loadDashboardForumCount() {
+  try {
+    const data = await apiRequest("/forum/my-count");
+
+    document.getElementById("forumQuestions").textContent =
+      data.question_count || 0;
+  } catch (error) {
+    console.error("Forum count loading error:", error);
+    document.getElementById("forumQuestions").textContent = "0";
   }
 }
