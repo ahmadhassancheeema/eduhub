@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Manage Books | EduHub Admin</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="admin.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub Admin
+      </a>
+
+      <nav class="nav-links">
+        <a href="admin.html">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="admin-books.html">Books</a>
+        <a href="dashboard.html">Student View</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="admin.html" class="back-link">← Back to Admin Dashboard</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Admin Books</p>
+          <h1>Manage bookstore books</h1>
+          <p>
+            Add new books, edit existing books, update stock, update price,
+            and activate or deactivate bookstore listings.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="adminBooksMessage" class="message-box"></div>
+
+      <section class="admin-section">
+        <h2 id="bookFormTitle">Add New Book</h2>
+
+        <form id="bookForm">
+          <input type="hidden" id="bookId" />
+
+          <div class="toolbar" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label for="bookTitle">Title</label>
+              <input type="text" id="bookTitle" required />
+            </div>
+
+            <div class="form-group">
+              <label for="bookAuthor">Author</label>
+              <input type="text" id="bookAuthor" required />
+            </div>
+
+            <div class="form-group">
+              <label for="bookIsbn">ISBN</label>
+              <input type="text" id="bookIsbn" />
+            </div>
+          </div>
+
+          <div class="toolbar" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label for="bookCategory">Category</label>
+              <input type="text" id="bookCategory" required />
+            </div>
+
+            <div class="form-group">
+              <label for="bookPrice">Price</label>
+              <input type="number" id="bookPrice" min="0" step="0.01" required />
+            </div>
+
+            <div class="form-group">
+              <label for="bookStock">Stock Quantity</label>
+              <input type="number" id="bookStock" min="0" step="1" required />
+            </div>
+          </div>
+
+          <div class="toolbar" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label for="bookPublisher">Publisher</label>
+              <input type="text" id="bookPublisher" />
+            </div>
+
+            <div class="form-group">
+              <label for="bookEdition">Edition</label>
+              <input type="text" id="bookEdition" />
+            </div>
+
+            <div class="form-group">
+              <label for="recommendedModule">Recommended Module</label>
+              <select id="recommendedModule">
+                <option value="">No module</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bookDescription">Description</label>
+            <textarea
+              id="bookDescription"
+              rows="5"
+              placeholder="Write a short description of the book..."
+              style="width: 100%; border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; font: inherit;"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="bookCoverUrl">Cover Image URL</label>
+            <input type="text" id="bookCoverUrl" placeholder="Optional image URL" />
+          </div>
+
+          <div class="module-actions" style="margin-top: 18px;">
+            <button type="submit" class="btn btn-primary" id="saveBookButton">
+              Add Book
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="resetBookFormButton">
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="bookSearch"
+          placeholder="Search by title, author, ISBN, category, or publisher..."
+        />
+
+        <select id="bookStatusFilter">
+          <option value="all">All statuses</option>
+          <option value="active">Active only</option>
+          <option value="inactive">Inactive only</option>
+        </select>
+
+        <button id="refreshBooksButton" class="btn btn-secondary">
+          Refresh
+        </button>
+      </div>
+
+      <section class="admin-section">
+        <h2>Books</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Module</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="booksTableBody">
+              <tr>
+                <td colspan="7">Loading books...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-books.js"></script>
+</body>
+</html>
