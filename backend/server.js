@@ -35,7 +35,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const forumRoutes = require("./routes/forumRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const adminBookRoutes = require("./routes/adminBookRoutes");
-
+const adminLearningRoutes = require("./routes/adminLearningRoutes");
 
 const notFoundMiddleware = require("./middleware/notFoundMiddleware");
 const errorMiddleware = require("./middleware/errorMiddleware");
@@ -117,6 +117,7 @@ app.use("/api", orderRoutes);
 app.use("/api/forum", forumRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/admin/books", adminBookRoutes);
+app.use("/api/admin/learning", adminLearningRoutes);
 
 /**
  * 404 handler.

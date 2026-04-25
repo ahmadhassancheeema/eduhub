@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Manage Learning | EduHub Admin</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="admin.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub Admin
+      </a>
+
+      <nav class="nav-links">
+        <a href="admin.html">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="admin-books.html">Books</a>
+        <a href="admin-learning.html">Learning</a>
+        <a href="dashboard.html">Student View</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="admin.html" class="back-link">← Back to Admin Dashboard</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Admin Learning</p>
+          <h1>Manage modules, lessons, and resources</h1>
+          <p>
+            Add learning categories, create modules, manage lessons, and attach resources.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="adminLearningMessage" class="message-box"></div>
+
+      <!-- CATEGORY FORM -->
+      <section class="admin-section">
+        <h2>Add Module Category</h2>
+
+        <form id="categoryForm">
+          <div class="toolbar" style="grid-template-columns: 1fr 2fr auto;">
+            <div class="form-group">
+              <label for="categoryName">Category Name</label>
+              <input type="text" id="categoryName" placeholder="Example: Artificial Intelligence" required />
+            </div>
+
+            <div class="form-group">
+              <label for="categoryDescription">Description</label>
+              <input type="text" id="categoryDescription" placeholder="Short category description" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Add Category
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- MODULE FORM -->
+      <section class="admin-section">
+        <h2 id="moduleFormTitle">Add New Module</h2>
+
+        <form id="moduleForm">
+          <input type="hidden" id="moduleId" />
+
+          <div class="toolbar" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label for="moduleTitle">Module Title</label>
+              <input type="text" id="moduleTitle" required />
+            </div>
+
+            <div class="form-group">
+              <label for="moduleCode">Module Code</label>
+              <input type="text" id="moduleCode" placeholder="WEB101" required />
+            </div>
+
+            <div class="form-group">
+              <label for="moduleCategory">Category</label>
+              <select id="moduleCategory">
+                <option value="">No category</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="toolbar" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="form-group">
+              <label for="moduleInstructor">Instructor Name</label>
+              <input type="text" id="moduleInstructor" required />
+            </div>
+
+            <div class="form-group">
+              <label for="moduleDifficulty">Difficulty</label>
+              <select id="moduleDifficulty">
+                <option value="beginner">beginner</option>
+                <option value="intermediate">intermediate</option>
+                <option value="advanced">advanced</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="moduleHours">Estimated Hours</label>
+              <input type="number" id="moduleHours" min="0" step="1" value="0" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="moduleDescription">Description</label>
+            <textarea
+              id="moduleDescription"
+              rows="4"
+              required
+              style="width: 100%; border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; font: inherit;"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="moduleThumbnail">Thumbnail URL</label>
+            <input type="text" id="moduleThumbnail" placeholder="Optional image URL" />
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="modulePublished" checked />
+              Published
+            </label>
+          </div>
+
+          <div class="module-actions">
+            <button type="submit" class="btn btn-primary" id="saveModuleButton">
+              Add Module
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="resetModuleFormButton">
+              Reset Module Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- MODULE LIST -->
+      <div class="toolbar">
+        <input
+          type="search"
+          id="moduleSearch"
+          placeholder="Search modules by title, code, description, or instructor..."
+        />
+
+        <select id="moduleStatusFilter">
+          <option value="all">All statuses</option>
+          <option value="published">Published only</option>
+          <option value="unpublished">Unpublished only</option>
+        </select>
+
+        <button id="refreshModulesButton" class="btn btn-secondary">
+          Refresh
+        </button>
+      </div>
+
+      <section class="admin-section">
+        <h2>Modules</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Module</th>
+                <th>Category</th>
+                <th>Instructor</th>
+                <th>Lessons</th>
+                <th>Resources</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="modulesTableBody">
+              <tr>
+                <td colspan="7">Loading modules...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SELECTED MODULE PANEL -->
+      <section class="admin-section">
+        <h2>Selected Module</h2>
+        <p>
+          Select a module from the table above to manage its lessons and resources.
+        </p>
+
+        <div class="cart-summary">
+          <div>
+            <strong id="selectedModuleTitle">No module selected</strong>
+            <p id="selectedModuleMeta" style="margin: 0; color: var(--muted);">
+              Choose Manage Content on a module.
+            </p>
+          </div>
+
+          <button id="reloadSelectedModuleButton" class="btn btn-secondary" disabled>
+            Reload Lessons and Resources
+          </button>
+        </div>
+      </section>
+
+      <!-- LESSON FORM -->
+      <section class="admin-section">
+        <h2 id="lessonFormTitle">Add Lesson</h2>
+
+        <form id="lessonForm">
+          <input type="hidden" id="lessonId" />
+
+          <div class="toolbar" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="form-group">
+              <label for="lessonTitle">Lesson Title</label>
+              <input type="text" id="lessonTitle" required />
+            </div>
+
+            <div class="form-group">
+              <label for="lessonOrder">Lesson Order</label>
+              <input type="number" id="lessonOrder" min="1" step="1" required />
+            </div>
+
+            <div class="form-group">
+              <label for="lessonDuration">Duration Minutes</label>
+              <input type="number" id="lessonDuration" min="0" step="1" value="0" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lessonDescription">Lesson Description</label>
+            <textarea
+              id="lessonDescription"
+              rows="3"
+              style="width: 100%; border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; font: inherit;"
+            ></textarea>
+          </div>
+
+          <div class="module-actions">
+            <button type="submit" class="btn btn-primary" id="saveLessonButton">
+              Add Lesson
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="resetLessonFormButton">
+              Reset Lesson Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- LESSON LIST -->
+      <section class="admin-section">
+        <h2>Lessons</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Lesson</th>
+                <th>Duration</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="lessonsTableBody">
+              <tr>
+                <td colspan="4">Select a module first.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RESOURCE FORM -->
+      <section class="admin-section">
+        <h2 id="resourceFormTitle">Add Resource</h2>
+
+        <form id="resourceForm">
+          <input type="hidden" id="resourceId" />
+
+          <div class="toolbar" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="form-group">
+              <label for="resourceTitle">Resource Title</label>
+              <input type="text" id="resourceTitle" required />
+            </div>
+
+            <div class="form-group">
+              <label for="resourceType">Resource Type</label>
+              <select id="resourceType" required>
+                <option value="text">text</option>
+                <option value="pdf">pdf</option>
+                <option value="video">video</option>
+                <option value="slide">slide</option>
+                <option value="link">link</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="resourceLesson">Attach to Lesson</label>
+              <select id="resourceLesson">
+                <option value="">No lesson</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="resourceDescription">Resource Description</label>
+            <textarea
+              id="resourceDescription"
+              rows="3"
+              style="width: 100%; border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; font: inherit;"
+            ></textarea>
+          </div>
+
+          <div class="toolbar" style="grid-template-columns: 1fr 1fr;">
+            <div class="form-group">
+              <label for="resourceFileUrl">File URL</label>
+              <input type="text" id="resourceFileUrl" placeholder="Optional file URL" />
+            </div>
+
+            <div class="form-group">
+              <label for="resourceExternalUrl">External URL</label>
+              <input type="text" id="resourceExternalUrl" placeholder="Optional external URL" />
+            </div>
+          </div>
+
+          <div class="module-actions">
+            <button type="submit" class="btn btn-primary" id="saveResourceButton">
+              Add Resource
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="resetResourceFormButton">
+              Reset Resource Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RESOURCE LIST -->
+      <section class="admin-section">
+        <h2>Resources</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Resource</th>
+                <th>Type</th>
+                <th>Lesson</th>
+                <th>Links</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="resourcesTableBody">
+              <tr>
+                <td colspan="5">Select a module first.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-learning.js"></script>
+</body>
+</html>
