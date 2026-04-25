@@ -2,13 +2,13 @@
 
 EduHub is a full-stack academic platform for students. It combines student authentication, learning modules, progress tracking, favorites, academic discussion, an academic bookstore, and an admin management system into one organized web application.
 
-This project is being developed as a realistic student full-stack web technology project using HTML, CSS, JavaScript, Node.js, Express.js, and Supabase PostgreSQL.
+This project was built as a realistic student full-stack web technology project using HTML, CSS, JavaScript, Node.js, Express.js, and Supabase PostgreSQL.
 
 ---
 
 ## Current Project Status
 
-Current completed phases:
+Completed phases:
 
 ```text
 Phase 1: Foundation and Authentication completed
@@ -17,12 +17,13 @@ Phase 3: Favorites completed
 Phase 4: Bookstore, Cart, Checkout, and Orders completed
 Phase 5: Discussion Forum completed
 Phase 6: Admin Panel completed
+Phase 7: Frontend Polish and Final Testing Prep completed
 ```
 
-Next phase:
+Deployment status:
 
 ```text
-Phase 7: Final Polish, Testing, and Deployment
+Deployment is postponed and will be done later.
 ```
 
 ---
@@ -110,22 +111,15 @@ Manage modules
 Publish and unpublish modules
 Manage lessons
 Manage learning resources
-```
 
----
-
-## Planned Features
-
-Still planned:
-
-```text
-Final UI polish
-Responsive design improvements
-Better loading states
-Better error messages
-Manual testing
-Deployment
-Final README documentation
+Frontend polish
+Improved global color system
+Improved page header readability
+Modernized forms and inputs
+Improved dashboard layout
+Improved navigation connectivity
+Role-aware Admin Panel link for admin users
+Professional demo seed data
 ```
 
 ---
@@ -158,6 +152,7 @@ Supabase PostgreSQL
 ```text
 bcrypt password hashing
 JWT tokens
+Role-based access control
 ```
 
 ### Development Tools
@@ -173,9 +168,9 @@ Nodemon
 
 ---
 
-## Database Tables Created
+## Database Tables
 
-The current Supabase PostgreSQL database includes:
+The Supabase PostgreSQL database includes:
 
 ```text
 users
@@ -197,6 +192,33 @@ forum_votes
 forum_reports
 forum_tags
 question_tags
+```
+
+---
+
+## SQL Files
+
+The backend SQL folder includes:
+
+```text
+01_schema.sql
+02_seed.sql
+03_indexes.sql
+04_learning_schema.sql
+05_learning_seed.sql
+06_favorites_schema.sql
+07_bookstore_schema.sql
+08_bookstore_seed.sql
+09_forum_schema.sql
+10_forum_seed.sql
+11_demo_data.sql
+```
+
+Important:
+
+```text
+SQL files are stored in the repository for setup/reference.
+They must be manually run in Supabase SQL Editor when setting up a fresh database.
 ```
 
 ---
@@ -337,7 +359,7 @@ DELETE /api/admin/learning/resources/:id
 
 ---
 
-## Current Frontend Pages
+## Frontend Pages
 
 ```text
 index.html
@@ -406,7 +428,27 @@ Important:
 Never push the real .env file to GitHub.
 ```
 
-### 4. Run the Backend
+### 4. Run Database SQL Files
+
+In Supabase SQL Editor, run the SQL files in order:
+
+```text
+01_schema.sql
+02_seed.sql
+03_indexes.sql
+04_learning_schema.sql
+05_learning_seed.sql
+06_favorites_schema.sql
+07_bookstore_schema.sql
+08_bookstore_seed.sql
+09_forum_schema.sql
+10_forum_seed.sql
+11_demo_data.sql
+```
+
+### 5. Run the Backend
+
+From the `backend` folder:
 
 ```powershell
 npm run dev
@@ -418,7 +460,7 @@ The backend should run at:
 http://localhost:5000
 ```
 
-### 5. Run the Frontend
+### 6. Run the Frontend
 
 Open the project in VS Code.
 
@@ -472,6 +514,45 @@ Expected result:
 
 ---
 
+## Demo Data
+
+Professional demo data is provided in:
+
+```text
+backend/sql/11_demo_data.sql
+```
+
+It adds:
+
+```text
+Extra module categories
+Extra learning modules
+Extra lessons
+Extra resources
+Extra books
+Demo forum questions
+Demo forum answers
+Forum tags
+```
+
+Example demo modules:
+
+```text
+AI101 - Introduction to Artificial Intelligence
+CYB201 - Cybersecurity Essentials
+SKL101 - Academic Study Skills
+```
+
+Example demo bookstore books:
+
+```text
+Artificial Intelligence for Beginners
+Cybersecurity Essentials for Students
+Study Skills for University Success
+```
+
+---
+
 ## Security Features Implemented
 
 The project currently includes:
@@ -502,6 +583,65 @@ If any password was shared during testing, change it before deployment or final 
 
 ---
 
+## Manual Testing Checklist
+
+Before final presentation, test:
+
+```text
+Register new student
+Login as student
+Logout
+Dashboard stats load
+Learning modules load
+Open module details
+Enroll in a module
+Complete lesson
+Uncomplete lesson
+Add favorite
+Remove favorite
+
+Open bookstore
+Search books
+Filter books
+View book details
+Add book to cart
+Update cart quantity
+Checkout
+View orders
+
+Open forum
+Ask question
+Open question details
+Post answer
+Upvote/downvote question
+Upvote/downvote answer
+Report question
+Report answer
+
+Login as admin
+Open admin dashboard
+Manage users
+Change user role
+Activate/deactivate user
+Manage orders
+Change order status
+Review forum reports
+Hide/lock/reopen question
+Hide/show answer
+Manage books
+Add/edit/activate/deactivate book
+Manage learning content
+Add/edit/publish/unpublish module
+Add/edit/delete lesson
+Add/edit/delete resource
+
+Admin switches to Student View
+Admin Panel link appears for admin user
+Admin can return to admin panel
+```
+
+---
+
 ## Development Phases
 
 ### Phase 1: Foundation and Authentication
@@ -512,25 +652,6 @@ Status:
 Completed
 ```
 
-Includes:
-
-```text
-Backend setup
-Database connection
-Users table
-Register API
-Login API
-JWT authentication
-Protected dashboard
-Homepage
-Register page
-Login page
-Dashboard page
-Logout
-```
-
----
-
 ### Phase 2: Learning Wing and Progress Tracking
 
 Status:
@@ -538,24 +659,6 @@ Status:
 ```text
 Completed
 ```
-
-Includes:
-
-```text
-Module categories
-Modules
-Lessons
-Resources
-Module enrollment
-Lesson completion
-Lesson uncomplete feature
-Progress calculation
-Learning page
-Module details page
-Real dashboard progress
-```
-
----
 
 ### Phase 3: Favorites
 
@@ -565,20 +668,6 @@ Status:
 Completed
 ```
 
-Includes:
-
-```text
-Favorites table
-Favorites API
-Save module to favorites
-Remove module from favorites
-Save resources to favorites
-Favorites page
-Remove favorites from favorites page
-```
-
----
-
 ### Phase 4: Bookstore, Cart, Checkout, and Orders
 
 Status:
@@ -586,33 +675,6 @@ Status:
 ```text
 Completed
 ```
-
-Includes:
-
-```text
-Books table
-Cart items table
-Orders table
-Order items table
-Bookstore API
-Book details API
-Cart API
-Checkout API
-Orders API
-Bookstore page
-Book details page
-Cart page
-Orders page
-Add to cart
-Update cart quantity
-Remove cart item
-Clear cart
-Simulated checkout
-Purchase history
-Dashboard books purchased count
-```
-
----
 
 ### Phase 5: Discussion Forum
 
@@ -622,33 +684,6 @@ Status:
 Completed
 ```
 
-Includes:
-
-```text
-Forum categories
-Forum tags
-Questions table
-Answers table
-Votes table
-Reports table
-Question tags table
-Forum API
-Question listing
-Question search
-Category filter
-Tag filter
-Ask question page
-Question details page
-Post answer feature
-Question voting
-Answer voting
-Question reporting
-Answer reporting
-Dashboard forum question count
-```
-
----
-
 ### Phase 6: Admin Panel
 
 Status:
@@ -657,52 +692,52 @@ Status:
 Completed
 ```
 
-Includes:
-
-```text
-Admin dashboard
-Admin analytics
-Admin-only route protection
-Manage users
-Change user roles
-Activate/deactivate users
-Manage orders
-Update order status
-Manage forum reports
-Moderate reported questions
-Moderate reported answers
-Manage books
-Add/edit books
-Activate/deactivate books
-Manage learning categories
-Manage modules
-Publish/unpublish modules
-Manage lessons
-Manage resources
-```
-
----
-
-### Phase 7: Final Polish, Testing, and Deployment
+### Phase 7: Frontend Polish and Final Testing Prep
 
 Status:
 
 ```text
-Not started
+Completed without deployment
 ```
 
-Will include:
+Includes:
 
 ```text
-Responsive design review
-UI consistency improvements
-Error message improvements
-Manual testing checklist
-Deployment preparation
-Frontend deployment
-Backend deployment
-Supabase production checks
-Final README update
+Global styling improvements
+Better color contrast
+Modern input styling
+Dashboard layout update
+Homepage navigation improvement
+Admin-to-student navigation fix
+Role-aware admin link
+Demo data added
+Manual testing checklist prepared
+```
+
+---
+
+## Deployment
+
+Deployment is not completed yet.
+
+Planned future deployment setup:
+
+```text
+Frontend: Netlify or Vercel
+Backend: Render
+Database: Supabase PostgreSQL
+Repository: GitHub
+```
+
+Before deployment:
+
+```text
+Rotate/change any exposed testing password.
+Create production environment variables.
+Update frontend API base URL.
+Configure CORS for deployed frontend URL.
+Test backend live API routes.
+Test full deployed user flow.
 ```
 
 ---
@@ -714,15 +749,3 @@ Repository:
 ```text
 https://github.com/ahmadhassancheeema/eduhub
 ```
-
----
-
-## Current Recommended Next Step
-
-The next development task is:
-
-```text
-Phase 7: Final Polish, Testing, and Deployment
-```
-
-Phase 7 will prepare EduHub for final presentation, testing, and deployment.
