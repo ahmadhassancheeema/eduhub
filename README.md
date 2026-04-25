@@ -15,12 +15,13 @@ Phase 1: Foundation and Authentication completed
 Phase 2: Learning Wing and Progress Tracking completed
 Phase 3: Favorites completed
 Phase 4: Bookstore, Cart, Checkout, and Orders completed
+Phase 5: Discussion Forum completed
 ```
 
 Next phase:
 
 ```text
-Phase 5: Discussion Forum
+Phase 6: Admin Panel
 ```
 
 ---
@@ -68,6 +69,24 @@ Simulated checkout
 Order creation
 Order history page
 Real dashboard books purchased count
+
+Discussion forum
+Forum categories
+Forum tags
+Question listing
+Question search
+Question category filtering
+Question tag filtering
+Ask question page
+Question details page
+Post answers
+Upvote questions
+Downvote questions
+Upvote answers
+Downvote answers
+Report questions
+Report answers
+Real dashboard forum question count
 ```
 
 ---
@@ -77,12 +96,15 @@ Real dashboard books purchased count
 Still planned:
 
 ```text
-Discussion forum
-Questions and answers
-Votes
-Reports
-Moderation
 Admin panel
+User management
+Module management
+Lesson management
+Resource management
+Book management
+Order management
+Forum report moderation
+Analytics dashboard
 Deployment
 Testing
 Final polish
@@ -144,6 +166,7 @@ eduhub/
 │   │   ├── bookController.js
 │   │   ├── cartController.js
 │   │   ├── favoriteController.js
+│   │   ├── forumController.js
 │   │   ├── lessonController.js
 │   │   ├── moduleController.js
 │   │   ├── orderController.js
@@ -160,6 +183,7 @@ eduhub/
 │   │   ├── bookRoutes.js
 │   │   ├── cartRoutes.js
 │   │   ├── favoriteRoutes.js
+│   │   ├── forumRoutes.js
 │   │   ├── lessonRoutes.js
 │   │   ├── moduleRoutes.js
 │   │   ├── orderRoutes.js
@@ -174,7 +198,9 @@ eduhub/
 │   │   ├── 05_learning_seed.sql
 │   │   ├── 06_favorites_schema.sql
 │   │   ├── 07_bookstore_schema.sql
-│   │   └── 08_bookstore_seed.sql
+│   │   ├── 08_bookstore_seed.sql
+│   │   ├── 09_forum_schema.sql
+│   │   └── 10_forum_seed.sql
 │   │
 │   ├── uploads/
 │   │   └── .gitkeep
@@ -201,11 +227,13 @@ eduhub/
 │   │   ├── auth.css
 │   │   ├── bookstore.css
 │   │   ├── dashboard.css
+│   │   ├── forum.css
 │   │   ├── learning.css
 │   │   └── style.css
 │   │
 │   ├── js/
 │   │   ├── api.js
+│   │   ├── ask-question.js
 │   │   ├── auth.js
 │   │   ├── book-details.js
 │   │   ├── bookstore.js
@@ -213,21 +241,26 @@ eduhub/
 │   │   ├── config.js
 │   │   ├── dashboard.js
 │   │   ├── favorites.js
+│   │   ├── forum.js
 │   │   ├── learning.js
 │   │   ├── main.js
 │   │   ├── module-details.js
-│   │   └── orders.js
+│   │   ├── orders.js
+│   │   └── question.js
 │   │
+│   ├── ask-question.html
 │   ├── book-details.html
 │   ├── bookstore.html
 │   ├── cart.html
 │   ├── dashboard.html
 │   ├── favorites.html
+│   ├── forum.html
 │   ├── index.html
 │   ├── learning.html
 │   ├── login.html
 │   ├── module-details.html
 │   ├── orders.html
+│   ├── question.html
 │   └── register.html
 │
 ├── .vscode/
@@ -254,6 +287,13 @@ books
 cart_items
 orders
 order_items
+forum_categories
+forum_questions
+forum_answers
+forum_votes
+forum_reports
+forum_tags
+question_tags
 ```
 
 ---
@@ -337,6 +377,23 @@ GET  /api/orders
 GET  /api/orders/:id
 ```
 
+### Discussion Forum
+
+```text
+GET  /api/forum/categories
+GET  /api/forum/tags
+GET  /api/forum/my-count
+
+GET  /api/forum/questions
+POST /api/forum/questions
+GET  /api/forum/questions/:id
+
+POST /api/forum/questions/:id/answers
+
+POST /api/forum/vote
+POST /api/forum/report
+```
+
 ---
 
 ## Current Frontend Pages
@@ -353,6 +410,9 @@ bookstore.html
 book-details.html
 cart.html
 orders.html
+forum.html
+ask-question.html
+question.html
 ```
 
 ---
@@ -419,6 +479,12 @@ frontend/index.html
 
 using Live Server.
 
+The frontend usually runs at:
+
+```text
+http://127.0.0.1:5500
+```
+
 ---
 
 ## Test Routes
@@ -470,6 +536,7 @@ User account active/inactive check
 Role field prepared for admin/moderator system
 No real payment details stored
 Simulated checkout only
+Forum report system prepared for moderation
 ```
 
 Important security reminder:
@@ -598,22 +665,32 @@ Dashboard books purchased count
 Status:
 
 ```text
-Not started
+Completed
 ```
 
-Will include:
+Includes:
 
 ```text
 Forum categories
-Questions
-Answers
-Votes
-Reports
-Tags
-Moderation
-Forum page
-Question details page
+Forum tags
+Questions table
+Answers table
+Votes table
+Reports table
+Question tags table
+Forum API
+Question listing
+Question search
+Category filter
+Tag filter
 Ask question page
+Question details page
+Post answer feature
+Question voting
+Answer voting
+Question reporting
+Answer reporting
+Dashboard forum question count
 ```
 
 ---
@@ -629,6 +706,7 @@ Not started
 Will include:
 
 ```text
+Admin dashboard
 Manage users
 Manage modules
 Manage lessons
@@ -677,7 +755,7 @@ https://github.com/ahmadhassancheeema/eduhub
 The next development task is:
 
 ```text
-Phase 5: Discussion Forum
+Phase 6: Admin Panel
 ```
 
-Phase 5 will add academic questions, answers, votes, reports, tags, and moderation-ready forum functionality.
+Phase 6 will add admin-only management for users, learning content, books, orders, forum reports, and analytics.
