@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Manage Users | EduHub Admin</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="admin.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub Admin
+      </a>
+
+      <nav class="nav-links">
+        <a href="admin.html">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="dashboard.html">Student View</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="admin.html" class="back-link">← Back to Admin Dashboard</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Admin Users</p>
+          <h1>Manage platform users</h1>
+          <p>
+            Search users, change roles, and activate or deactivate accounts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="adminUsersMessage" class="message-box"></div>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="userSearch"
+          placeholder="Search by name, email, student ID, or program..."
+        />
+
+        <button id="refreshUsersButton" class="btn btn-secondary">
+          Refresh
+        </button>
+
+        <a href="admin.html" class="btn btn-primary">
+          Dashboard
+        </a>
+      </div>
+
+      <section class="admin-section">
+        <h2>Users</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Student ID</th>
+                <th>Program</th>
+                <th>Year</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Change Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="usersTableBody">
+              <tr>
+                <td colspan="9">Loading users...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-users.js"></script>
+</body>
+</html>

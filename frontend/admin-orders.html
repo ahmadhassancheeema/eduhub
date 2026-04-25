@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Manage Orders | EduHub Admin</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="admin.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub Admin
+      </a>
+
+      <nav class="nav-links">
+        <a href="admin.html">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-orders.html">Orders</a>
+        <a href="admin-reports.html">Reports</a>
+        <a href="dashboard.html">Student View</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <a href="admin.html" class="back-link">← Back to Admin Dashboard</a>
+
+        <div class="page-header-card">
+          <p class="eyebrow">Admin Orders</p>
+          <h1>Manage bookstore orders</h1>
+          <p>
+            View all student bookstore orders and update order status.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="adminOrdersMessage" class="message-box"></div>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="orderSearch"
+          placeholder="Search by student name, email, order ID, or status..."
+        />
+
+        <select id="statusFilter">
+          <option value="">All statuses</option>
+          <option value="pending">pending</option>
+          <option value="completed">completed</option>
+          <option value="cancelled">cancelled</option>
+        </select>
+
+        <button id="refreshOrdersButton" class="btn btn-secondary">
+          Refresh
+        </button>
+      </div>
+
+      <section class="admin-section">
+        <h2>Orders</h2>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Student</th>
+                <th>Email</th>
+                <th>Total</th>
+                <th>Items</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Change Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="8">Loading orders...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin-orders.js"></script>
+</body>
+</html>
