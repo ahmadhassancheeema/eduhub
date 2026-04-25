@@ -1,6 +1,6 @@
 # EduHub
 
-EduHub is a full-stack academic platform for students. It combines student authentication, learning modules, progress tracking, favorites, academic discussion, and a bookstore into one organized web application.
+EduHub is a full-stack academic platform for students. It combines student authentication, learning modules, progress tracking, favorites, academic discussion, and an academic bookstore into one organized web application.
 
 This project is being developed as a realistic student full-stack web technology project using HTML, CSS, JavaScript, Node.js, Express.js, and Supabase PostgreSQL.
 
@@ -14,12 +14,13 @@ Current completed phases:
 Phase 1: Foundation and Authentication completed
 Phase 2: Learning Wing and Progress Tracking completed
 Phase 3: Favorites completed
+Phase 4: Bookstore, Cart, Checkout, and Orders completed
 ```
 
 Next phase:
 
 ```text
-Phase 4: Bookstore
+Phase 5: Discussion Forum
 ```
 
 ---
@@ -36,6 +37,7 @@ Password hashing
 Protected dashboard
 Real user profile loading
 Supabase PostgreSQL connection
+
 Learning modules
 Module categories
 Module lessons
@@ -45,12 +47,27 @@ Lesson completion tracking
 Lesson uncomplete feature
 Progress percentage calculation
 Real dashboard progress statistics
+
 Favorites system
 Favorites page
 Save module to favorites
 Remove module from favorites
 Save learning resources to favorites
 Remove favorites
+
+Bookstore
+Book browsing
+Book search
+Book category filtering
+Book details page
+Cart
+Update cart quantity
+Remove cart items
+Clear cart
+Simulated checkout
+Order creation
+Order history page
+Real dashboard books purchased count
 ```
 
 ---
@@ -60,11 +77,6 @@ Remove favorites
 Still planned:
 
 ```text
-Bookstore
-Cart
-Simulated checkout
-Orders
-Purchase history
 Discussion forum
 Questions and answers
 Votes
@@ -129,9 +141,12 @@ eduhub/
 ├── backend/
 │   ├── controllers/
 │   │   ├── authController.js
+│   │   ├── bookController.js
+│   │   ├── cartController.js
 │   │   ├── favoriteController.js
 │   │   ├── lessonController.js
 │   │   ├── moduleController.js
+│   │   ├── orderController.js
 │   │   ├── progressController.js
 │   │   └── resourceController.js
 │   │
@@ -142,9 +157,12 @@ eduhub/
 │   │
 │   ├── routes/
 │   │   ├── authRoutes.js
+│   │   ├── bookRoutes.js
+│   │   ├── cartRoutes.js
 │   │   ├── favoriteRoutes.js
 │   │   ├── lessonRoutes.js
 │   │   ├── moduleRoutes.js
+│   │   ├── orderRoutes.js
 │   │   ├── progressRoutes.js
 │   │   └── resourceRoutes.js
 │   │
@@ -154,7 +172,9 @@ eduhub/
 │   │   ├── 03_indexes.sql
 │   │   ├── 04_learning_schema.sql
 │   │   ├── 05_learning_seed.sql
-│   │   └── 06_favorites_schema.sql
+│   │   ├── 06_favorites_schema.sql
+│   │   ├── 07_bookstore_schema.sql
+│   │   └── 08_bookstore_seed.sql
 │   │
 │   ├── uploads/
 │   │   └── .gitkeep
@@ -179,6 +199,7 @@ eduhub/
 │   │
 │   ├── css/
 │   │   ├── auth.css
+│   │   ├── bookstore.css
 │   │   ├── dashboard.css
 │   │   ├── learning.css
 │   │   └── style.css
@@ -186,19 +207,27 @@ eduhub/
 │   ├── js/
 │   │   ├── api.js
 │   │   ├── auth.js
+│   │   ├── book-details.js
+│   │   ├── bookstore.js
+│   │   ├── cart.js
 │   │   ├── config.js
 │   │   ├── dashboard.js
 │   │   ├── favorites.js
 │   │   ├── learning.js
 │   │   ├── main.js
-│   │   └── module-details.js
+│   │   ├── module-details.js
+│   │   └── orders.js
 │   │
+│   ├── book-details.html
+│   ├── bookstore.html
+│   ├── cart.html
 │   ├── dashboard.html
 │   ├── favorites.html
 │   ├── index.html
 │   ├── learning.html
 │   ├── login.html
 │   ├── module-details.html
+│   ├── orders.html
 │   └── register.html
 │
 ├── .vscode/
@@ -221,6 +250,10 @@ resources
 module_enrollments
 student_progress
 favorites
+books
+cart_items
+orders
+order_items
 ```
 
 ---
@@ -278,6 +311,32 @@ DELETE /api/favorites/:id
 DELETE /api/favorites
 ```
 
+### Bookstore
+
+```text
+GET /api/books/categories
+GET /api/books
+GET /api/books/:id
+```
+
+### Cart
+
+```text
+GET    /api/cart
+POST   /api/cart
+PUT    /api/cart/:id
+DELETE /api/cart/:id
+DELETE /api/cart
+```
+
+### Checkout and Orders
+
+```text
+POST /api/checkout
+GET  /api/orders
+GET  /api/orders/:id
+```
+
 ---
 
 ## Current Frontend Pages
@@ -290,6 +349,10 @@ dashboard.html
 learning.html
 module-details.html
 favorites.html
+bookstore.html
+book-details.html
+cart.html
+orders.html
 ```
 
 ---
@@ -405,6 +468,8 @@ CORS setup
 Basic input validation
 User account active/inactive check
 Role field prepared for admin/moderator system
+No real payment details stored
+Simulated checkout only
 ```
 
 Important security reminder:
@@ -493,26 +558,37 @@ Remove favorites from favorites page
 
 ---
 
-### Phase 4: Bookstore
+### Phase 4: Bookstore, Cart, Checkout, and Orders
 
 Status:
 
 ```text
-Not started
+Completed
 ```
 
-Will include:
+Includes:
 
 ```text
 Books table
-Cart table
+Cart items table
 Orders table
 Order items table
+Bookstore API
+Book details API
+Cart API
+Checkout API
+Orders API
 Bookstore page
 Book details page
 Cart page
+Orders page
+Add to cart
+Update cart quantity
+Remove cart item
+Clear cart
 Simulated checkout
 Purchase history
+Dashboard books purchased count
 ```
 
 ---
@@ -535,6 +611,9 @@ Votes
 Reports
 Tags
 Moderation
+Forum page
+Question details page
+Ask question page
 ```
 
 ---
@@ -598,7 +677,7 @@ https://github.com/ahmadhassancheeema/eduhub
 The next development task is:
 
 ```text
-Phase 4: Bookstore
+Phase 5: Discussion Forum
 ```
 
-Phase 4 will add academic books, cart management, simulated checkout, orders, and purchase history.
+Phase 5 will add academic questions, answers, votes, reports, tags, and moderation-ready forum functionality.
