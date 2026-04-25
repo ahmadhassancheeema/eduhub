@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard | EduHub</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="admin.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub Admin
+      </a>
+
+      <nav class="nav-links">
+        <a href="admin.html">Admin Dashboard</a>
+        <a href="dashboard.html">Student View</a>
+        <a href="learning.html">Learning</a>
+        <a href="forum.html">Forum</a>
+        <a href="bookstore.html">Bookstore</a>
+        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header-card">
+          <p class="eyebrow">Admin Panel</p>
+          <h1>Platform management dashboard</h1>
+          <p>
+            View platform statistics and manage users, orders, forum reports,
+            learning content, and bookstore data.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="adminMessage" class="message-box"></div>
+
+      <section class="admin-grid">
+        <article class="admin-card">
+          <span>Total Users</span>
+          <strong id="totalUsers">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Total Modules</span>
+          <strong id="totalModules">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Total Books</span>
+          <strong id="totalBooks">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Total Orders</span>
+          <strong id="totalOrders">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Total Sales</span>
+          <strong id="totalSales">RM 0.00</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Forum Questions</span>
+          <strong id="totalQuestions">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Pending Reports</span>
+          <strong id="pendingReports">0</strong>
+        </article>
+
+        <article class="admin-card">
+          <span>Inactive Users</span>
+          <strong id="inactiveUsers">0</strong>
+        </article>
+      </section>
+
+      <section class="admin-section">
+        <h2>Management Areas</h2>
+        <p>
+          These pages will help the admin manage the EduHub platform. We will build
+          the detailed pages next.
+        </p>
+
+        <div class="admin-actions-grid">
+          <article class="admin-action-card">
+            <h3>Manage Users</h3>
+            <p>View users, change roles, and activate/deactivate accounts.</p>
+            <a href="admin-users.html" class="btn btn-primary">Open Users</a>
+          </article>
+
+          <article class="admin-action-card">
+            <h3>Manage Orders</h3>
+            <p>View bookstore orders and update order status.</p>
+            <a href="admin-orders.html" class="btn btn-primary">Open Orders</a>
+          </article>
+
+          <article class="admin-action-card">
+            <h3>Forum Reports</h3>
+            <p>Review reported questions and answers.</p>
+            <a href="admin-reports.html" class="btn btn-primary">Open Reports</a>
+          </article>
+
+          <article class="admin-action-card">
+            <h3>Learning Content</h3>
+            <p>Manage modules, lessons, and resources in a later admin step.</p>
+            <button class="btn btn-secondary" disabled>Coming Soon</button>
+          </article>
+
+          <article class="admin-action-card">
+            <h3>Book Management</h3>
+            <p>Add, edit, and update books in a later admin step.</p>
+            <button class="btn btn-secondary" disabled>Coming Soon</button>
+          </article>
+
+          <article class="admin-action-card">
+            <h3>Analytics</h3>
+            <p>View summary statistics about activity across the platform.</p>
+            <button class="btn btn-secondary" disabled>Basic stats shown above</button>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
