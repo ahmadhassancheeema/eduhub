@@ -87,10 +87,12 @@ async function loadCart() {
 }
 
 function createCartItem(item) {
-  return `
-    <article class="cart-item">
-      <div class="cart-item-top">
-        <div>
+    return `
+      <article class="cart-item card reveal-item reveal-visible" style="display: flex; align-items: center; gap: var(--space-4); animation: slideIn var(--duration-normal) var(--ease-spring);">
+        <div class="book-cover" style="width: 60px; height: 80px; flex-shrink: 0; display: grid; place-items: center; background: var(--surface-soft); border-radius: var(--r-sm); font-weight: 800; font-size: 1.5rem; color: var(--muted);">
+          ${escapeHtml(item.title.charAt(0))}
+        </div>
+        <div class="cart-item-top" style="flex-grow: 1;">
           <h2>${escapeHtml(item.title)}</h2>
           <p>by ${escapeHtml(item.author)}</p>
           <p>${escapeHtml(item.category)}</p>
@@ -194,8 +196,10 @@ function showMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

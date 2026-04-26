@@ -159,12 +159,24 @@ function createQuestionCard(question) {
   const tags = normalizeTags(question.tags);
 
   return `
-    <article class="question-card">
+    <article class="question-card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
       <div class="question-meta">
-        <span class="badge">${escapeHtml(question.category_name || "General")}</span>
-        <span class="badge badge-muted">By ${escapeHtml(question.author_name)}</span>
-        <span class="badge badge-muted">${formatDate(question.created_at)}</span>
-        <span class="badge badge-success">Score: ${question.vote_score || 0}</span>
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          ${escapeHtml(question.author_name)}
+        </span>
+        <span class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          ${escapeHtml(question.category_name || "General")}
+        </span>
+        <span class="badge badge-muted">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          ${formatDate(question.created_at)}
+        </span>
+        <span class="badge badge-success">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Score: ${question.vote_score || 0}
+        </span>
       </div>
 
       <h2>${escapeHtml(question.title)}</h2>
@@ -261,8 +273,10 @@ function showMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

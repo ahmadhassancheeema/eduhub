@@ -150,8 +150,8 @@ function createLessonItem(lesson) {
   const completed = lesson.is_completed === true;
 
   return `
-    <article class="lesson-item">
-      <div class="lesson-top">
+    <article class="lesson-card card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-3);">
         <div>
           <h3 class="lesson-title">
             Lesson ${lesson.lesson_order}: ${escapeHtml(lesson.title)}
@@ -281,8 +281,10 @@ function showDetailMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

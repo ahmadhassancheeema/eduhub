@@ -5,37 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register | EduHub</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/auth.css" />
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html" class="logo">EduHub</a>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">E</span>
+        EduHub
+      </a>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <main class="auth-wrapper">
-    <section class="auth-card">
-      <h1>Create Account</h1>
-      <p>Register as a student to access EduHub.</p>
+  <main class="auth-page">
+    <section class="auth-card reveal-item reveal-visible" style="opacity: 1; transform: none;">
+      <h1>Create Account ✨</h1>
+      <p style="color: var(--muted); margin-bottom: var(--space-6);">Register as a student to access EduHub.</p>
 
       <form id="registerForm">
         <div class="form-group">
           <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" required />
+          <input type="text" id="fullName" required placeholder="John Doe" />
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email" required placeholder="student@eduhub.edu" />
         </div>
 
-        <div class="form-group">
-          <label for="studentId">Student ID</label>
-          <input type="text" id="studentId" />
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input type="text" id="studentId" placeholder="e.g. BCS240200" />
+          </div>
+          <div class="form-group">
+            <label for="yearOfStudy">Year of Study</label>
+            <input type="number" id="yearOfStudy" min="1" placeholder="e.g. 1" />
+          </div>
         </div>
 
         <div class="form-group">
@@ -43,24 +71,22 @@
           <input type="text" id="program" placeholder="Example: Web Technology" />
         </div>
 
-        <div class="form-group">
-          <label for="yearOfStudy">Year of Study</label>
-          <input type="number" id="yearOfStudy" min="1" />
-        </div>
-
-        <div class="form-group">
+        <div class="form-group" style="position: relative;">
           <label for="password">Password</label>
-          <input type="password" id="password" required />
+          <input type="password" id="password" required placeholder="Create a secure password" />
+          <button type="button" id="togglePassword" style="position: absolute; right: 14px; top: 46px; background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px;">
+            👁️
+          </button>
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--space-2);">Register</button>
 
-        <p id="message" class="message"></p>
+        <div id="message" class="message-box" style="display: none;"></div>
       </form>
 
-      <p class="auth-switch">
+      <p class="auth-switch" style="text-align: center; margin-top: var(--space-6); color: var(--muted);">
         Already have an account?
-        <a href="login.html">Login here</a>
+        <a href="login.html" style="font-weight: 800;">Login here</a>
       </p>
     </section>
   </main>
@@ -68,23 +94,38 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
 
   <script>
     const registerForm = document.getElementById('registerForm');
     const message = document.getElementById('message');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = registerForm.querySelector('button[type="submit"]');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordBtn.textContent = '🔒';
+      } else {
+        passwordInput.type = 'password';
+        togglePasswordBtn.textContent = '👁️';
+      }
+    });
 
     registerForm.addEventListener('submit', async function (event) {
       event.preventDefault();
 
-      message.textContent = 'Creating your account...';
-      message.className = 'message';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+      message.style.display = 'none';
 
       const fullName = document.getElementById('fullName').value.trim();
       const email = document.getElementById('email').value.trim();
       const studentId = document.getElementById('studentId').value.trim();
       const program = document.getElementById('program').value.trim();
       const yearOfStudy = document.getElementById('yearOfStudy').value;
-      const password = document.getElementById('password').value;
+      const password = passwordInput.value;
 
       try {
         const data = await apiRequest('/auth/register', {
@@ -101,15 +142,19 @@
 
         saveAuthData(data.token, data.user);
 
-        message.textContent = 'Account created successfully. Redirecting...';
-        message.className = 'message success';
+        message.textContent = 'Account created successfully! Redirecting...';
+        message.className = 'message-box success';
+        message.style.display = 'block';
 
         setTimeout(() => {
           window.location.href = 'dashboard.html';
         }, 800);
       } catch (error) {
         message.textContent = error.message;
-        message.className = 'message error';
+        message.className = 'message-box error';
+        message.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Register';
       }
     });
   </script>

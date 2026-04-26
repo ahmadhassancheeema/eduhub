@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- Phase 1: Glassmorphism Navbar + Theme Toggle -->
   <header class="navbar">
     <div class="container nav-inner">
       <a href="index.html" class="logo">
@@ -22,63 +23,91 @@
         <a href="#about">About</a>
         <a href="login.html">Login</a>
         <a href="register.html" class="btn btn-primary">Register</a>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Phase 2: Animated Hero Section -->
     <section id="home" class="hero">
       <div class="container">
-        <p class="eyebrow">Academic Learning Platform</p>
+        <div class="reveal-item">
+          <p class="eyebrow">Academic Learning Platform</p>
+          <h1>Your Academic Learning Platform</h1>
+          <p>
+            EduHub helps students access learning modules, track progress,
+            join academic discussions, and explore study resources in one place.
+          </p>
 
-        <h1>Your Academic Learning Platform</h1>
-
-        <p>
-          EduHub helps students access learning modules, track progress,
-          join academic discussions, and explore study resources in one place.
-        </p>
-
-        <div class="module-actions" style="margin-top: 26px;">
-          <a href="register.html" class="btn btn-primary">Get Started</a>
-          <a href="login.html" class="btn btn-secondary">Login</a>
+          <div class="module-actions" style="margin-top: 26px;">
+            <a href="register.html" class="btn btn-primary">Get Started</a>
+            <a href="login.html" class="btn btn-secondary">Login</a>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Phase 2: Feature Grid with Reveal & Icons -->
     <section id="features" class="section">
       <div class="container">
-        <h2 class="section-title">Everything students need in one place</h2>
-        <p class="section-subtitle">
-          EduHub combines learning, discussion, progress tracking, and academic resources.
-        </p>
+        <div class="reveal-item">
+          <h2 class="section-title">Everything students need in one place</h2>
+          <p class="section-subtitle">
+            EduHub combines learning, discussion, progress tracking, and academic resources.
+          </p>
+        </div>
 
         <div class="admin-actions-grid">
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge" style="margin-bottom: 12px; font-size: 1.2rem;">📚</span>
             <h3>Learning Wing</h3>
             <p>Browse modules, lessons, notes, videos, and academic resources.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge badge-success" style="margin-bottom: 12px; font-size: 1.2rem;">📈</span>
             <h3>Student Portal</h3>
             <p>Track your progress, completed lessons, favorites, and activity.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge badge-danger" style="margin-bottom: 12px; font-size: 1.2rem;">💬</span>
             <h3>Discussion Forum</h3>
             <p>Ask questions, answer classmates, vote, and report inappropriate content.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge" style="margin-bottom: 12px; font-size: 1.2rem;">🛍️</span>
             <h3>Bookstore</h3>
             <p>Browse academic books, add to cart, checkout, and view orders.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge badge-success" style="margin-bottom: 12px; font-size: 1.2rem;">❤️</span>
             <h3>Favorites</h3>
             <p>Save modules and resources so you can return to them quickly.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card reveal-item">
+            <span class="badge badge-muted" style="margin-bottom: 12px; font-size: 1.2rem;">⚙️</span>
             <h3>Admin Panel</h3>
             <p>Admins can manage users, learning content, books, orders, and reports.</p>
           </article>
@@ -86,9 +115,10 @@
       </div>
     </section>
 
+    <!-- Phase 2: About Section -->
     <section id="about" class="section" style="background: var(--background-soft);">
       <div class="container">
-        <div class="page-header-card">
+        <div class="page-header-card reveal-item">
           <p class="eyebrow">Why EduHub?</p>
           <h1>Built for organized academic learning</h1>
           <p>
@@ -97,12 +127,25 @@
           </p>
 
           <div class="module-actions" style="margin-top: 26px;">
-            <a href="register.html" class="btn btn-primary">Create Account</a>
-            <a href="login.html" class="btn btn-secondary">Already have an account?</a>
+            <a href="register.html" class="btn btn-primary" style="background: var(--surface); color: var(--primary);">Create Account</a>
+            <a href="login.html" class="btn" style="color: white; border: 1px solid rgba(255,255,255,0.3);">Already have an account?</a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- New Footer -->
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/ui.js"></script>
 </body>
 </html>

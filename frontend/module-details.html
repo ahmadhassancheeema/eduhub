@@ -3,30 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Module Details | EduHub</title>
-
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/learning.css" />
 </head>
 <body>
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">
+      <a href="dashboard.html" class="logo">
         <span class="logo-badge">E</span>
         EduHub
       </a>
 
       <nav class="nav-links">
         <a href="dashboard.html">Dashboard</a>
-        <a href="learning.html">Learning</a>
+        <a href="learning.html" class="active">Learning</a>
         <a href="favorites.html">Favorites</a>
         <a href="forum.html">Forum</a>
         <a href="bookstore.html">Bookstore</a>
         <a href="cart.html">Cart</a>
         <a href="orders.html">Orders</a>
-        <a href="admin.html" class="admin-only-link" style="display: none;">Admin Panel</a>
-        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+        <a href="admin.html" class="admin-only-link" style="display: none; color: var(--warning);">Admin Panel</a>
+        <button id="logoutButton" class="btn btn-secondary" style="margin-left: 8px;">Logout</button>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -34,86 +50,56 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <a href="learning.html" class="back-link">← Back to Learning Wing</a>
-
-        <div class="page-header-card">
-          <p class="eyebrow">Module Details</p>
-          <h1 id="moduleTitle">Loading module...</h1>
-          <p id="moduleDescription">Please wait while the module details load.</p>
+        <a href="learning.html" class="back-link reveal-item">
+          ← Back to Modules
+        </a>
+        
+        <div id="moduleHeaderContainer" class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+          <div class="skeleton" style="height: 120px; background: rgba(255,255,255,0.1);"></div>
         </div>
       </div>
     </section>
 
-    <section class="container">
-      <div id="detailMessage" class="message-box"></div>
+    <section class="container reveal-item">
+      <div id="moduleMessage" style="display: none;"></div>
 
-      <div class="module-detail-layout">
-        <div class="panel">
-          <h2>Lessons</h2>
-
-          <div id="lessonList" class="lesson-list">
-            <div class="empty-state">Loading lessons...</div>
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8); margin-top: var(--space-6);">
+        <!-- Lessons Column -->
+        <div>
+          <h2 style="margin-top: 0;">Module Lessons</h2>
+          <div id="lessonsContainer" style="display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-4);">
+            <div class="skeleton" style="height: 120px;"></div>
+            <div class="skeleton" style="height: 120px;"></div>
           </div>
         </div>
 
-        <aside>
-          <div class="panel">
-            <h2>Module Summary</h2>
-
-            <div class="module-meta">
-              <span class="badge" id="moduleCode">Code</span>
-              <span class="badge badge-muted" id="moduleCategory">Category</span>
-              <span class="badge badge-muted" id="moduleDifficulty">Difficulty</span>
-            </div>
-
-            <p style="margin-top: 16px;">
-              <strong>Instructor:</strong>
-              <span id="moduleInstructor">Loading...</span>
-            </p>
-
-            <button id="enrollButton" class="btn btn-primary btn-full">
-              Start Module
-            </button>
-
-            <div class="detail-stat-grid">
-              <div class="detail-stat">
-                <span>Total Lessons</span>
-                <strong id="moduleLessons">0</strong>
-              </div>
-
-              <div class="detail-stat">
-                <span>Completed</span>
-                <strong id="moduleCompleted">0</strong>
-              </div>
-            </div>
-
-            <div style="margin-top: 18px;">
-              <div class="small-progress-text">
-                <span>Progress</span>
-                <span id="moduleProgress">0%</span>
-              </div>
-
-              <div class="progress-bar">
-                <div id="moduleProgressFill" class="progress-fill" style="width: 0%"></div>
-              </div>
+        <!-- Instructor Info Column -->
+        <div>
+          <div class="card reveal-item" style="position: sticky; top: 100px;">
+            <h2 style="margin-top: 0; margin-bottom: var(--space-4);">Module Info</h2>
+            <div id="moduleInfoContainer">
+              <div class="skeleton" style="height: 180px;"></div>
             </div>
           </div>
-
-          <div class="panel" style="margin-top: 22px;">
-            <h2>Resources</h2>
-
-            <div id="resourceList" class="resource-list">
-              <div class="empty-state">Loading resources...</div>
-            </div>
-          </div>
-        </aside>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/module-details.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>

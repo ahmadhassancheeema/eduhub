@@ -3,30 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Admin Dashboard | EduHub</title>
-
+  <title>Admin Panel | EduHub</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/learning.css" />
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="admin.html" class="logo">
-        <span class="logo-badge">E</span>
+      <a href="dashboard.html" class="logo">
+        <span class="logo-badge" style="background: linear-gradient(135deg, var(--warning), var(--danger));">A</span>
         EduHub Admin
       </a>
 
       <nav class="nav-links">
-        <a href="admin.html">Admin Dashboard</a>
-        <a href="admin-users.html">Users</a>
-        <a href="admin-orders.html">Orders</a>
-        <a href="admin-reports.html">Reports</a>
-        <a href="admin-books.html">Books</a>
-        <a href="admin-learning.html">Learning</a>
-        <a href="dashboard.html">Student View</a>
-        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="learning.html">Learning</a>
+        <a href="bookstore.html">Bookstore</a>
+        <a href="admin.html" class="active" style="color: var(--warning);">Admin Panel</a>
+        <button id="logoutButton" class="btn btn-secondary" style="margin-left: 8px;">Logout</button>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -34,111 +46,182 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <div class="page-header-card">
-          <p class="eyebrow">Admin Panel</p>
-          <h1>Platform management dashboard</h1>
-          <p>
-            View platform statistics and manage users, orders, forum reports,
-            learning content, and bookstore data.
-          </p>
+        <div class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--warning) 0%, var(--danger) 100%);">
+          <p class="eyebrow">Control Center</p>
+          <h1>Admin Panel</h1>
+          <p>Manage users, learning modules, books, orders, and system settings.</p>
         </div>
       </div>
     </section>
 
-    <section class="container">
-      <div id="adminMessage" class="message-box"></div>
+    <section class="container reveal-item">
+      <div id="adminMessage" style="display: none;"></div>
 
-      <section class="admin-grid">
-        <article class="admin-card">
+      <div class="admin-grid" style="margin-bottom: var(--space-8);">
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--primary);">
           <span>Total Users</span>
           <strong id="totalUsers">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--success);">
           <span>Total Modules</span>
           <strong id="totalModules">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--warning);">
           <span>Total Books</span>
           <strong id="totalBooks">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--danger);">
           <span>Total Orders</span>
           <strong id="totalOrders">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--primary-dark);">
           <span>Total Sales</span>
           <strong id="totalSales">RM 0.00</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--accent);">
           <span>Forum Questions</span>
           <strong id="totalQuestions">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid #f43f5e;">
           <span>Pending Reports</span>
           <strong id="pendingReports">0</strong>
-        </article>
-
-        <article class="admin-card">
+        </div>
+        <div class="admin-card card reveal-item" style="border-top: 4px solid var(--muted);">
           <span>Inactive Users</span>
           <strong id="inactiveUsers">0</strong>
-        </article>
-      </section>
-
-      <section class="admin-section">
-        <h2>Management Areas</h2>
-        <p>
-          These pages help the admin manage the EduHub platform from one place.
-        </p>
-
-        <div class="admin-actions-grid">
-          <article class="admin-action-card">
-            <h3>Manage Users</h3>
-            <p>View users, change roles, and activate or deactivate accounts.</p>
-            <a href="admin-users.html" class="btn btn-primary">Open Users</a>
-          </article>
-
-          <article class="admin-action-card">
-            <h3>Manage Orders</h3>
-            <p>View bookstore orders and update order status.</p>
-            <a href="admin-orders.html" class="btn btn-primary">Open Orders</a>
-          </article>
-
-          <article class="admin-action-card">
-            <h3>Forum Reports</h3>
-            <p>Review reported questions and answers, then moderate content.</p>
-            <a href="admin-reports.html" class="btn btn-primary">Open Reports</a>
-          </article>
-
-          <article class="admin-action-card">
-            <h3>Learning Content</h3>
-            <p>Manage module categories, modules, lessons, and learning resources.</p>
-            <a href="admin-learning.html" class="btn btn-primary">Open Learning</a>
-          </article>
-
-          <article class="admin-action-card">
-            <h3>Book Management</h3>
-            <p>Add, edit, update, activate, and deactivate bookstore books.</p>
-            <a href="admin-books.html" class="btn btn-primary">Open Books</a>
-          </article>
-
-          <article class="admin-action-card">
-            <h3>Analytics</h3>
-            <p>View summary statistics about users, learning, bookstore, and forum activity.</p>
-            <button class="btn btn-secondary" disabled>Basic stats shown above</button>
-          </article>
         </div>
-      </section>
+      </div>
+
+      <div class="toolbar reveal-item">
+        <button class="btn btn-primary" onclick="showSection('users')">Users</button>
+        <button class="btn btn-secondary" onclick="showSection('modules')">Modules</button>
+        <button class="btn btn-secondary" onclick="showSection('books')">Books</button>
+        <button class="btn btn-secondary" onclick="showSection('orders')">Orders</button>
+      </div>
+
+      <!-- Users Section -->
+      <div id="section-users" class="admin-section card reveal-item">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+          <h2 style="margin: 0;">Users Management</h2>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Registered</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="5" style="text-align: center; padding: var(--space-4);">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modules Section -->
+      <div id="section-modules" class="admin-section card reveal-item" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+          <h2 style="margin: 0;">Modules Management</h2>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Instructor</th>
+                <th>Enrolled</th>
+              </tr>
+            </thead>
+            <tbody id="modulesTableBody">
+              <tr><td colspan="5" style="text-align: center; padding: var(--space-4);">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Books Section -->
+      <div id="section-books" class="admin-section card reveal-item" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+          <h2 style="margin: 0;">Books Management</h2>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody id="booksTableBody">
+              <tr><td colspan="5" style="text-align: center; padding: var(--space-4);">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div id="section-orders" class="admin-section card reveal-item" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+          <h2 style="margin: 0;">Orders Management</h2>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr><td colspan="5" style="text-align: center; padding: var(--space-4);">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
+
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/nav.js"></script>
   <script src="js/admin.js"></script>
+  <script src="js/ui.js"></script>
+
+  <script>
+    // Simple tab switching for the admin page
+    function showSection(sectionId) {
+      document.querySelectorAll('.admin-section').forEach(el => el.style.display = 'none');
+      document.getElementById('section-' + sectionId).style.display = 'block';
+      
+      const buttons = document.querySelectorAll('.toolbar button');
+      buttons.forEach(btn => {
+        btn.className = 'btn btn-secondary';
+      });
+      event.target.className = 'btn btn-primary';
+    }
+  </script>
 </body>
 </html>

@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Favorites | EduHub</title>
-
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/learning.css" />
+  <link rel="stylesheet" href="css/bookstore.css" />
 </head>
 <body>
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">
+      <a href="dashboard.html" class="logo">
         <span class="logo-badge">E</span>
         EduHub
       </a>
@@ -20,13 +19,31 @@
       <nav class="nav-links">
         <a href="dashboard.html">Dashboard</a>
         <a href="learning.html">Learning</a>
-        <a href="favorites.html">Favorites</a>
+        <a href="favorites.html" class="active">Favorites</a>
         <a href="forum.html">Forum</a>
         <a href="bookstore.html">Bookstore</a>
         <a href="cart.html">Cart</a>
         <a href="orders.html">Orders</a>
-        <a href="admin.html" class="admin-only-link" style="display: none;">Admin Panel</a>
-        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+        <a href="admin.html" class="admin-only-link" style="display: none; color: var(--warning);">Admin Panel</a>
+        <button id="logoutButton" class="btn btn-secondary" style="margin-left: 8px;">Logout</button>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -34,28 +51,49 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <div class="page-header-card">
-          <p class="eyebrow">Saved Items</p>
-          <h1>Your favorites</h1>
-          <p>
-            Quickly return to modules and resources you saved while studying.
-          </p>
+        <div class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--danger) 0%, #be123c 100%);">
+          <p class="eyebrow">Your Collection</p>
+          <h1>Saved Favorites</h1>
+          <p>Quickly access your saved learning modules, lessons, and books.</p>
         </div>
       </div>
     </section>
 
-    <section class="container">
-      <div id="favoritesMessage" class="message-box"></div>
+    <section class="container reveal-item">
+      <div id="favoritesMessage" style="display: none;"></div>
 
-      <div id="favoritesContainer" class="learning-grid">
-        <div class="empty-state">Loading favorites...</div>
+      <div class="toolbar" style="display: flex; justify-content: flex-end;">
+        <button id="refreshFavoritesButton" class="btn btn-secondary">Refresh</button>
+      </div>
+
+      <h2 style="margin-top: var(--space-8);">Saved Modules</h2>
+      <div id="favoriteModulesContainer" class="learning-grid">
+        <div class="skeleton" style="height: 320px;"></div>
+        <div class="skeleton" style="height: 320px;"></div>
+      </div>
+
+      <h2 style="margin-top: var(--space-12);">Saved Books</h2>
+      <div id="favoriteBooksContainer" class="bookstore-grid">
+        <div class="skeleton" style="height: 380px;"></div>
+        <div class="skeleton" style="height: 380px;"></div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/favorites.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>

@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bookstore | EduHub</title>
-
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/learning.css" />
   <link rel="stylesheet" href="css/bookstore.css" />
 </head>
 <body>
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">
+      <a href="dashboard.html" class="logo">
         <span class="logo-badge">E</span>
         EduHub
       </a>
@@ -23,11 +20,29 @@
         <a href="learning.html">Learning</a>
         <a href="favorites.html">Favorites</a>
         <a href="forum.html">Forum</a>
-        <a href="bookstore.html">Bookstore</a>
+        <a href="bookstore.html" class="active">Bookstore</a>
         <a href="cart.html">Cart</a>
         <a href="orders.html">Orders</a>
-        <a href="admin.html" class="admin-only-link" style="display: none;">Admin Panel</a>
-        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+        <a href="admin.html" class="admin-only-link" style="display: none; color: var(--warning);">Admin Panel</a>
+        <button id="logoutButton" class="btn btn-secondary" style="margin-left: 8px;">Logout</button>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -35,27 +50,27 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <div class="page-header-card">
+        <div class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);">
           <p class="eyebrow">Academic Bookstore</p>
-          <h1>Find books for your modules</h1>
+          <h1>Find your course materials</h1>
           <p>
-            Browse academic books, add them to your cart, and complete a simulated checkout.
+            Browse and purchase academic books, reference materials, and study guides for your modules.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="container">
-      <div id="bookstoreMessage" class="message-box"></div>
+    <section class="container reveal-item">
+      <div id="bookMessage" style="display: none;"></div>
 
       <div class="toolbar">
         <input
           type="search"
           id="bookSearch"
-          placeholder="Search books by title, author, ISBN, or description..."
+          placeholder="🔍 Search books by title, author, or ISBN..."
         />
 
-        <select id="bookCategoryFilter">
+        <select id="categoryFilter">
           <option value="">All categories</option>
         </select>
 
@@ -64,26 +79,29 @@
         </button>
       </div>
 
-      <div class="cart-summary">
-        <div>
-          <strong>Bookstore Cart</strong>
-          <p style="margin: 0; color: var(--muted);">
-            Add books here, then open your cart to checkout.
-          </p>
-        </div>
-
-        <a href="cart.html" class="btn btn-primary">View Cart</a>
-      </div>
-
       <div id="booksContainer" class="bookstore-grid">
-        <div class="empty-state">Loading books...</div>
+        <div class="skeleton" style="height: 380px;"></div>
+        <div class="skeleton" style="height: 380px;"></div>
+        <div class="skeleton" style="height: 380px;"></div>
+        <div class="skeleton" style="height: 380px;"></div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/bookstore.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>

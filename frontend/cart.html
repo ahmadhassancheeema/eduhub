@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Cart | EduHub</title>
-
+  <title>Shopping Cart | EduHub</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/learning.css" />
   <link rel="stylesheet" href="css/bookstore.css" />
 </head>
 <body>
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">
+      <a href="dashboard.html" class="logo">
         <span class="logo-badge">E</span>
         EduHub
       </a>
@@ -24,10 +21,28 @@
         <a href="favorites.html">Favorites</a>
         <a href="forum.html">Forum</a>
         <a href="bookstore.html">Bookstore</a>
-        <a href="cart.html">Cart</a>
+        <a href="cart.html" class="active">Cart</a>
         <a href="orders.html">Orders</a>
-        <a href="admin.html" class="admin-only-link" style="display: none;">Admin Panel</a>
-        <button id="logoutButton" class="btn btn-secondary">Logout</button>
+        <a href="admin.html" class="admin-only-link" style="display: none; color: var(--warning);">Admin Panel</a>
+        <button id="logoutButton" class="btn btn-secondary" style="margin-left: 8px;">Logout</button>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -35,49 +50,67 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <div class="page-header-card">
-          <p class="eyebrow">Your Cart</p>
-          <h1>Review your selected books</h1>
-          <p>
-            Update quantities, remove books, or complete a simulated checkout.
-          </p>
+        <div class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);">
+          <p class="eyebrow">Shopping Cart</p>
+          <h1>Your Selected Books</h1>
+          <p>Review the items in your cart before checking out.</p>
         </div>
       </div>
     </section>
 
-    <section class="container">
-      <div id="cartMessage" class="message-box"></div>
+    <section class="container reveal-item">
+      <div id="cartMessage" style="display: none;"></div>
 
-      <div class="cart-summary">
-        <div>
-          <strong>Total:</strong>
-          RM <span id="cartTotal">0.00</span>
-        </div>
-
-        <div class="module-actions">
-          <button id="checkoutButton" class="btn btn-primary">
-            Checkout
-          </button>
-
-          <button id="clearCartButton" class="btn btn-secondary">
-            Clear Cart
-          </button>
-
-          <a href="bookstore.html" class="btn btn-secondary">
-            Continue Shopping
-          </a>
-        </div>
+      <div class="toolbar" style="display: flex; justify-content: flex-end;">
+        <button id="clearCartButton" class="btn btn-secondary">Clear Cart</button>
       </div>
 
-      <div id="cartContainer" class="cart-list">
-        <div class="empty-state">Loading cart...</div>
+      <div class="cart-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8); margin-top: var(--space-6);">
+        <div id="cartItemsContainer" style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div class="skeleton" style="height: 120px;"></div>
+          <div class="skeleton" style="height: 120px;"></div>
+        </div>
+
+        <div class="checkout-panel card reveal-item" style="height: fit-content; position: sticky; top: 100px;">
+          <h2 style="margin-top: 0;">Order Summary</h2>
+          
+          <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+            <span style="color: var(--muted);">Subtotal</span>
+            <span id="cartSubtotal" style="font-weight: 700;">$0.00</span>
+          </div>
+          
+          <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--border);">
+            <span style="color: var(--muted);">Shipping</span>
+            <span style="color: var(--success); font-weight: 700;">Free</span>
+          </div>
+
+          <div class="summary-total" style="display: flex; justify-content: space-between; margin-bottom: var(--space-6); font-size: 1.25rem;">
+            <strong>Total</strong>
+            <strong id="cartTotal" style="color: var(--primary);">$0.00</strong>
+          </div>
+
+          <button id="checkoutButton" class="btn btn-primary btn-full">
+            Proceed to Checkout
+          </button>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-content reveal-item">
+      <div class="footer-logo">
+        <span class="logo-badge" style="width: 28px; height: 28px; font-size: 0.9rem; border-radius: 8px;">E</span>
+        EduHub
+      </div>
+      <p>© 2026 EduHub. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>

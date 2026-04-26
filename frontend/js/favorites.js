@@ -60,9 +60,10 @@ async function loadFavorites() {
       });
     });
   } catch (error) {
-    container.innerHTML = `
-      <div class="empty-state">
-        Could not load favorites.
+    return `
+    <article class="book-card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
+      <div class="book-cover">
+        ${escapeHtml(book.title).charAt(0)}
       </div>
     `;
 
@@ -94,7 +95,7 @@ function createFavoriteCard(favorite) {
   }
 
   return `
-    <article class="module-card">
+    <article class="module-card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
       <div class="module-meta">
         <span class="badge">${escapeHtml(favorite.item_type)}</span>
         ${
@@ -155,8 +156,10 @@ function showFavoritesMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

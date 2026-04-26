@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forum | EduHub</title>
+  <title>Ask a Question | EduHub</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/forum.css" />
 </head>
@@ -50,39 +50,74 @@
   <main>
     <section class="page-header">
       <div class="container">
+        <a href="forum.html" class="back-link reveal-item">
+          ← Back to Forum
+        </a>
         <div class="page-header-card reveal-item" style="background: linear-gradient(135deg, var(--success) 0%, var(--primary-dark) 100%);">
-          <p class="eyebrow">Discussion Forum</p>
-          <h1>Collaborate and ask questions</h1>
-          <p>
-            Connect with classmates, answer questions, and report inappropriate behavior.
-          </p>
+          <p class="eyebrow">New Discussion</p>
+          <h1>Ask a Question</h1>
+          <p>Provide details and context so classmates can help you better.</p>
         </div>
       </div>
     </section>
 
     <section class="container reveal-item">
-      <div id="forumMessage" style="display: none;"></div>
+      <div class="card" style="max-width: 800px; margin: 0 auto; padding: var(--space-8);">
+        <div id="formMessage" style="display: none;"></div>
 
-      <div class="toolbar">
-        <input
-          type="search"
-          id="forumSearch"
-          placeholder="🔍 Search forum discussions..."
-        />
+        <form id="newQuestionForm">
+          <div class="form-group">
+            <label for="title">Question Title</label>
+            <input
+              type="text"
+              id="title"
+              required
+              placeholder="Be specific and imagine you're asking a question to another person"
+            />
+          </div>
 
-        <button id="refreshForumButton" class="btn btn-secondary">
-          Refresh
-        </button>
+          <div class="form-group">
+            <label for="categoryId">Category</label>
+            <select id="categoryId" required>
+              <option value="">Select a category</option>
+              <option value="General">General</option>
+              <option value="Programming">Programming</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="Arts">Arts</option>
+              <option value="Business">Business</option>
+              <option value="Help">Help / Support</option>
+            </select>
+          </div>
 
-        <a href="new-question.html" class="btn btn-primary">
-          Ask Question
-        </a>
-      </div>
+          <div class="form-group">
+            <label for="content">Details / Body</label>
+            <textarea
+              id="content"
+              required
+              placeholder="Include all the information someone would need to answer your question..."
+              rows="6"
+            ></textarea>
+          </div>
 
-      <div id="questionsContainer" class="forum-grid" style="display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6);">
-        <div class="skeleton" style="height: 180px;"></div>
-        <div class="skeleton" style="height: 180px;"></div>
-        <div class="skeleton" style="height: 180px;"></div>
+          <div class="form-group">
+            <label for="tags">Tags (comma separated)</label>
+            <input
+              type="text"
+              id="tags"
+              placeholder="e.g. javascript, react, frontend"
+            />
+          </div>
+
+          <div style="display: flex; gap: var(--space-4); margin-top: var(--space-8);">
+            <button type="submit" class="btn btn-primary" style="flex: 1;">
+              Post Question
+            </button>
+            <a href="forum.html" class="btn btn-secondary">
+              Cancel
+            </a>
+          </div>
+        </form>
       </div>
     </section>
   </main>
@@ -100,7 +135,7 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/forum.js"></script>
+  <script src="js/new-question.js"></script>
   <script src="js/ui.js"></script>
 </body>
 </html>

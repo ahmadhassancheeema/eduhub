@@ -56,8 +56,8 @@ async function loadOrders() {
 
 function createOrderCard(order) {
   return `
-    <article class="order-card">
-      <div class="order-card-top">
+    <article class="order-card card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
+      <div class="order-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: var(--space-4); margin-bottom: var(--space-4);">
         <div>
           <h2>Order #${escapeHtml(order.id.slice(0, 8))}</h2>
           <p>
@@ -91,8 +91,10 @@ function showMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

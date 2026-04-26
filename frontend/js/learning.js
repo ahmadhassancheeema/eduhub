@@ -164,9 +164,9 @@ function createModuleCard(module) {
   const isFavorite = favoriteKeys.has(`module:${module.id}`);
 
   return `
-    <article class="module-card">
+    <article class="module-card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
       <div class="module-meta">
-        <span class="badge">${escapeHtml(module.category_name || "General")}</span>
+        <span class="badge">🏷️ ${escapeHtml(module.category_name || "General")}</span>
         <span class="badge ${enrolledClass}">${enrolledText}</span>
         <span class="badge badge-muted">${escapeHtml(module.difficulty_level)}</span>
         ${
@@ -280,8 +280,10 @@ function showLearningMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
+  messageBox.style.display = 'block';
 
   setTimeout(() => {
+    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);
