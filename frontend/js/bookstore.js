@@ -131,9 +131,9 @@ function createBookCard(book) {
   const inStock = stock > 0;
 
   return `
-    <article class="book-card reveal-item reveal-visible" style="animation: slideIn var(--duration-normal) var(--ease-spring);">
+    <article class="book-card">
       <div class="book-cover">
-        ${escapeHtml(book.title).charAt(0)}
+        ${escapeHtml(getBookInitials(book.title))}
       </div>
 
       <div class="module-meta">
@@ -199,10 +199,8 @@ function showBookstoreMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
-  messageBox.style.display = 'block';
 
   setTimeout(() => {
-    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);

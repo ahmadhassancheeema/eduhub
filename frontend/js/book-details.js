@@ -72,10 +72,7 @@ async function loadBookDetails() {
     document.getElementById("bookPrice").textContent =
       Number(currentBook.price || 0).toFixed(2);
 
-    document.getElementById("bookCover").innerHTML = `
-      <div class="book-cover-large animate-fade-in" style="display: grid; place-items: center; background: var(--surface-soft); border-radius: var(--r-xl); font-size: 4rem; color: var(--muted); border: 1px solid var(--border);">
-        ${getBookInitials(currentBook.title)}
-      </div>`;
+    document.getElementById("bookCover").textContent = getBookInitials(currentBook.title);
 
     const addButton = document.getElementById("addToCartButton");
 
@@ -121,10 +118,8 @@ function showMessage(message, type = "success") {
 
   messageBox.textContent = message;
   messageBox.className = `message-box ${type}`;
-  messageBox.style.display = 'block';
 
   setTimeout(() => {
-    messageBox.style.display = 'none';
     messageBox.textContent = "";
     messageBox.className = "message-box";
   }, 4000);
